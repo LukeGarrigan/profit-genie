@@ -35,6 +35,14 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.webjars.bower/angular-bootstrap-contextmenu -->
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>angular-bootstrap-contextmenu</artifactId>
+			<version>0.9.7</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -45,6 +53,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
 
 </project>
