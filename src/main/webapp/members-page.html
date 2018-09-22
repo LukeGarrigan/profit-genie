@@ -1,9 +1,22 @@
 <!DOCTYPE HTML>
+
+<script type="text/javascript" src="components/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="components/jquery-ui/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+<!-- Angular Material Library -->
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+<script src="js/membersPage.js"></script>
+
 <html>
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>unapp Template</title>
+	<title>Profit Genie</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
@@ -45,10 +58,11 @@
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
+
 	<![endif]-->
 
 	</head>
-	<body>
+	<body ng-app="membersPage">
 		
 	<div class="colorlib-loader"></div>
 
@@ -64,7 +78,7 @@
 							<ul>
 								<li><a href="index.html">Home</a></li>
 								<li class="has-dropdown active">
-									<a href="work.html">Works</a>
+									<a href="members-page.html">Members Page</a>
 									<ul class="dropdown">
 										<li><a href="work-grid.html">Works grid with text</a></li>
 										<li><a href="work-grid-without-text.html">Works grid w/o text</a></li>
@@ -89,8 +103,8 @@
 					<div class="container">
 						<div class="col-md-12 col-md-offset-0">
 							<div class="animate-box">
-								<h2>Portfolio</h2>
-								<p class="breadcrumbs"><span><a href="index.html">Home</a></span> <span>Work</span></p>
+								<h2>Members Page</h2>
+								<p class="breadcrumbs"><span><a href="index.html">Members Page</a></span> <span>Work</span></p>
 							</div>
 						</div>
 					</div>
@@ -98,10 +112,24 @@
 			</div>
 		</section>
 
-		<div class="colorlib-work">
+
+
+		<!-- ************************************************ MEMBERS PAGE ************************ -->
+
+
+		<div class="colorlib-work" ng-controller="membersPageController" ng-init="getAllMatchedBets()">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-12">
+
+					<!-- for testing rest request -->
+					<form ng-submit="submitMatchedBet()">
+						<input type="text" ng-model="description">
+						<input type="text" ng-model="affiliateLink">
+						<input type="submit" value="submit"/>
+					</form>
+
+
+					<div class="col-md-12" ng-click="">
 						<div class="work-flex">
 							<div class="half animate-box">
 								<div class="row no-gutters">
@@ -116,6 +144,7 @@
 										<div class="display-t desc">
 											<div class="display-tc">
 												<h2><a href="#">A beige chair at a basket</a></h2>
+												{{description}}
 												<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
 											</div>
 										</div>
@@ -124,6 +153,9 @@
 							</div>
 						</div>
 					</div>
+
+
+
 
 					<div class="col-md-12">
 						<div class="work-flex">
@@ -173,6 +205,7 @@
 						</div>
 					</div>
 
+
 					<div class="col-md-12">
 						<div class="work-flex">
 							<div class="half animate-box">
@@ -211,6 +244,8 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- ************************************************ END MEMBERS PAGE **************************************** -->
 
 		<footer id="colorlib-footer">
 			<div class="container">

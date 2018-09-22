@@ -3,7 +3,7 @@ package com.profitgenie.profitgenie.dao.domain;
 import javax.persistence.*;
 
 
-@Entity(name = "todone_user")
+@Entity(name = "PG_user")
 public class User extends AbstractEntity {
 
     @Column
