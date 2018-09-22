@@ -29,4 +29,11 @@ public class MatchedBetController {
     public List<MatchedBetDto> getMatchedBets() {
         return matchedBetService.getMatchedBets();
     }
+
+
+    @RequestMapping(value = "/updateMatchedBets", method = RequestMethod.POST)
+    public List<MatchedBetDto> updateMatchedBets(@RequestBody List<MatchedBetDto> matchedBetDtos) {
+        return matchedBetService.updateMatchedBets(matchedBetDtos);
+    }
+
 }

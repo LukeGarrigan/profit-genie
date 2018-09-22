@@ -14,6 +14,10 @@ public class MatchedBet extends AbstractEntity {
     private String affiliateLink;
     @Column
     private String pathToImage;
+    @Column
+    private String title;
+    @Column
+    private long sequence;
 
 
     public String getDescription() {
@@ -38,5 +42,21 @@ public class MatchedBet extends AbstractEntity {
 
     public void setPathToImage(String pathToImage) {
         this.pathToImage = pathToImage;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public long getSequence() {
+        return sequence;
+    }
+
+    public void setSequence(long sequence) {
+        this.sequence = sequence;
     }
 }
