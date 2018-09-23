@@ -35,7 +35,7 @@ membersPage.controller("membersPageController", function ($scope, $http) {
                 'Content-Type': 'application/json'
             }
         }).then(function response(response){
-            $scope.matchedBets.push(response.data);
+            $scope.matchedBets.unshift(response.data);
             console.log($scope.matchedBets);
         });
     }

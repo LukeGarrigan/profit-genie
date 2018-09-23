@@ -112,6 +112,8 @@
                             <h2>Members Page</h2>
                             <p class="breadcrumbs"><span><a href="index.html">Members Page</a></span> <span>Work</span>
                             </p>
+
+                            <input type="text" ng-model="searchCriteria" class="form-control search-bar" placeholder="Search">
                         </div>
                     </div>
                 </div>
@@ -123,7 +125,9 @@
     <!-- ************************************************ MEMBERS PAGE ************************ -->
 
 
-    <div class="colorlib-work" ng-controller="membersPageController" ng-init="getAllMatchedBets()">
+    <!--class="colorlib-work"-->
+
+    <div  ng-controller="membersPageController" ng-init="getAllMatchedBets()">
         <div class="container">
             <div class="row">
 
@@ -138,7 +142,7 @@
 
 
                 <div ui-sortable="sortableOptions" ng-model="matchedBets">
-                    <div class="col-md-12" ng-repeat="bet in matchedBets">
+                    <div class="col-md-12" ng-repeat="bet in matchedBets | filter: searchCriteria">
                         <div class="work-flex">
                             <div class="half animate-box">
                                 <div class="row no-gutters">
