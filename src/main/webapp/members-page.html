@@ -113,7 +113,12 @@
                             <p class="breadcrumbs"><span><a href="index.html">Members Page</a></span> <span>Work</span>
                             </p>
 
-                            <input type="text" ng-model="searchCriteria" class="form-control search-bar" placeholder="Search">
+
+                            <input type="text" ng-model="searchCriteria" class="form-control search-bar"
+                                   placeholder="Search">
+
+
+
                         </div>
                     </div>
                 </div>
@@ -127,24 +132,27 @@
 
     <!--class="colorlib-work"-->
 
-    <div  ng-controller="membersPageController" ng-init="getAllMatchedBets()">
+    <div ng-controller="membersPageController" ng-init="getAllMatchedBets()">
         <div class="container">
             <div class="row">
 
-                <!-- for testing rest request -->
-                <form ng-submit="submitMatchedBet()">
+                <div class="form-group">
+                    <!-- for testing rest request -->
+                    <form class="create-matched-bet"ng-submit="submitMatchedBet()">
+                        <input type="text" id="titleInput"class="form-control" ng-model="title" placeholder="Enter email">
+                        <input type="text" class="form-control" ng-model="description" placeholder="description">
+                        <input type="text" class="form-control" ng-model="affiliateLink" placeholder="link">
+                        <button type="submit" >Submit</button>
+                    </form>
 
-                    Title: <input type="text" ng-model="title">
-                    Description: <input type="text" ng-model="description">
-                    Affiliate Link: <input type="text" ng-model="affiliateLink">
-                    <input type="submit" value="submit"/>
-                </form>
+                </div>
+
 
 
                 <div ui-sortable="sortableOptions" ng-model="matchedBets">
                     <div class="col-md-12" ng-repeat="bet in matchedBets | filter: searchCriteria">
                         <div class="work-flex">
-                            <div class="half animate-box">
+                            <div class="half">
                                 <div class="row no-gutters">
                                     <div class="col-md-12 col-md-push-12 no-gutters">
                                         <a href="#" class="work-img"
@@ -152,7 +160,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="half animate-box">
+                            <div class="half">
                                 <div class="row no-gutters">
                                     <div class="col-md-12 col-md-pull-12 no-gutters">
                                         <div class="display-t desc">
@@ -319,6 +327,7 @@
     <script src="js/jquery.min.js"></script>
     <!-- jQuery Easing -->
     <script src="js/jquery.easing.1.3.js"></script>
+
     <!-- Bootstrap -->
     <script src="js/bootstrap.min.js"></script>
     <!-- Waypoints -->
@@ -337,6 +346,8 @@
     <!-- Main -->
     <script src="js/main.js"></script>
 
+</div>
 </body>
+
 </html>
 

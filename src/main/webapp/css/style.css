@@ -1482,5 +1482,24 @@ input[type="text"] {
   z-index: 9999;
   background: url(../images/loader.gif) center no-repeat #fff; }
 
+
+/*this is the bastard that stopped blocks being visible */
 .js .animate-box {
   opacity: 0; }
+
+.create-matched-bet {
+  margin-top:20px;
+}
+
+
+.create-matched-bet button{
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 12px 27px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top:8px;
+}
