@@ -1,2 +1,1 @@
-"# profit-genie" 
-"# profit-genie" 
+A website and subscription service for matched betting.
