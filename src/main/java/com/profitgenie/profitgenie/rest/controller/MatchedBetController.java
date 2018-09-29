@@ -3,12 +3,9 @@ package com.profitgenie.profitgenie.rest.controller;
 
 import com.profitgenie.profitgenie.rest.controller.dto.MatchedBetDto;
 import com.profitgenie.profitgenie.service.MatchedBetService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-        import org.springframework.web.bind.annotation.RequestMethod;
-        import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-        import javax.annotation.Resource;
+import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
@@ -34,6 +31,12 @@ public class MatchedBetController {
     @RequestMapping(value = "/updateMatchedBets", method = RequestMethod.POST)
     public List<MatchedBetDto> updateMatchedBets(@RequestBody List<MatchedBetDto> matchedBetDtos) {
         return matchedBetService.updateMatchedBets(matchedBetDtos);
+    }
+
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    public void deleteMatchedBet(@PathVariable String id) {
+        matchedBetService.deleteMatchedBet(Long.parseLong(id));
     }
 
 }

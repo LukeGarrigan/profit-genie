@@ -1,3 +1,4 @@
+
 @font-face {
   font-family: 'icomoon';
   src: url("../fonts/icomoon/icomoon.eot?srf3rx");
@@ -1502,4 +1503,14 @@ input[type="text"] {
   display: inline-block;
   font-size: 16px;
   margin-top:8px;
+}
+
+
+.cross img{
+  height: 1em;
+  width: 1em;
+  position: absolute;
+  top: 0.4em;
+  right: 1em;
+  cursor: pointer;
 }

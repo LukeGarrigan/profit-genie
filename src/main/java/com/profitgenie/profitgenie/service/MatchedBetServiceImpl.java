@@ -37,6 +37,8 @@ public class MatchedBetServiceImpl implements MatchedBetService, DtoDomainConver
 
         matchedBetDao.save(matchedBet);
 
+        // now has an id
+        matchedBetDto.setId(matchedBet.getId());
         return matchedBetDto;
     }
 
@@ -63,6 +65,11 @@ public class MatchedBetServiceImpl implements MatchedBetService, DtoDomainConver
         }
 
         return matchedBetDtos;
+    }
+
+    @Override
+    public void deleteMatchedBet(long id) {
+        matchedBetDao.deleteById(id);
     }
 
     private long getMatchedBetSequence(List<MatchedBetDto> matchedBetDtos, long id) {
@@ -97,6 +104,12 @@ public class MatchedBetServiceImpl implements MatchedBetService, DtoDomainConver
             matchedBet.setSequence(matchedBet.getSequence() + 1);
         }
     }
+
+
+
+
+
+
 }
 
 

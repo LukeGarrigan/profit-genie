@@ -12,4 +12,6 @@ public interface MatchedBetService {
     List<MatchedBetDto> getMatchedBets();
 
     List<MatchedBetDto> updateMatchedBets(List<MatchedBetDto> matchedBetDtos);
+
+    void deleteMatchedBet(long id);
 }

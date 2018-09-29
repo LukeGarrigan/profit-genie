@@ -65,6 +65,9 @@
     <!-- drag and drop -->
     <script type="text/javascript" src="components/angular-ui-sortable/sortable.js"></script>
 
+    <!-- shim is needed to support non-HTML5 FormData browsers (IE8-9)-->
+    <script src="components/bower_components/ng-file-upload/ng-file-upload-shim.min.js"></script>
+    <script src="components/bower_components/ng-file-upload/ng-file-upload.min.js"></script>
 </head>
 <body ng-app="membersPage">
 
@@ -118,7 +121,6 @@
                                    placeholder="Search">
 
 
-
                         </div>
                     </div>
                 </div>
@@ -138,25 +140,30 @@
 
                 <div class="form-group">
                     <!-- for testing rest request -->
-                    <form class="create-matched-bet"ng-submit="submitMatchedBet()">
-                        <input type="text" id="titleInput"class="form-control" ng-model="title" placeholder="Enter email">
-                        <input type="text" class="form-control" ng-model="description" placeholder="description">
-                        <input type="text" class="form-control" ng-model="affiliateLink" placeholder="link">
-                        <button type="submit" >Submit</button>
+                    <form id="create-matched-bet" class="create-matched-bet" ng-submit="submitMatchedBet()">
+                        <input type="text" id="titleInput" class="form-control" ng-model="title"
+                               placeholder="Enter Title">
+                        <textarea type="text" class="form-control" ng-model="description" placeholder="description"></textarea>
+                        <input type="text" class="form-control" ng-model="affiliateLink" placeholder="link"/>
+                        <button type="submit">Submit</button>
                     </form>
 
                 </div>
 
 
-
                 <div ui-sortable="sortableOptions" ng-model="matchedBets">
                     <div class="col-md-12" ng-repeat="bet in matchedBets | filter: searchCriteria">
+
+                        <!-- Upload an image-->
+                        <input type="file" ngf-select="onFileSelect($files)" multiple>
+                        <!--<button type="submit" ng-submit="submit()"></button>-->
+
                         <div class="work-flex">
                             <div class="half">
                                 <div class="row no-gutters">
                                     <div class="col-md-12 col-md-push-12 no-gutters">
                                         <a href="#" class="work-img"
-                                           style="background-image: url(images/work-1.jpg);"></a>
+                                           style="background-image: url(images/sky-bet.png);"></a>
                                     </div>
                                 </div>
                             </div>
@@ -170,12 +177,21 @@
                                                 <p>Even the all-powerful Pointing has no control about the blind texts
                                                     it is
                                                     an almost unorthographic life</p>
+
+                                                <a ng-href="{{bet.affiliateLink}}">Click here</a>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+
+                        <div class="cross">
+                            <img src="images/cancel-512.png" ng-click="deleteMatchedBet(bet.id)"/>
+                        </div>
+
                     </div>
                 </div>
 
