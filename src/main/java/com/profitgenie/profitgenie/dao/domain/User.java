@@ -3,7 +3,8 @@ package com.profitgenie.profitgenie.dao.domain;
 import javax.persistence.*;
 
 
-@Entity(name = "PG_user")
+@Table(name = "PG_user")
+@Entity
 public class User extends AbstractEntity {
 
     @Column
@@ -11,6 +12,8 @@ public class User extends AbstractEntity {
 
     @Column
     private String password;
+
+    public User(){}
 
     public String getEmail() {
         return email;

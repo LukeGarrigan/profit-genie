@@ -12,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class UserServiceImpl implements UserService, DtoDomainConversion<UserDto, User> {
 
@@ -29,10 +27,6 @@ public class UserServiceImpl implements UserService, DtoDomainConversion<UserDto
     private PasswordEncoder passwordEncoder;
 
 
-    public List<User> getAllUsers() {
-        return userDao.findAll();
-    }
-
     @Override
     public UserDto createUser(UserDto userDto) {
 
@@ -40,7 +34,7 @@ public class UserServiceImpl implements UserService, DtoDomainConversion<UserDto
         user.setEmail(userDto.getEmail());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
-        if (!userAlreadyExists(user)) {
+        if (!userAlreadyExists(user.getEmail())) {
             userDao.save(user);
             return toDto(user);
         }
@@ -56,35 +50,24 @@ public class UserServiceImpl implements UserService, DtoDomainConversion<UserDto
     @Override
     public UserDto loginUser(UserDto userDto) {
 
-        if (!doesUserExist(userDto)) {
+        User existingUser = userDao.findUserByEmail(userDto.getEmail());
+
+        if (existingUser == null) {
             throw new UserNotFoundException(userDto.getEmail());
         } else {
-            for (User existingUser : getAllUsers()) {
-                if (existingUser.getEmail().equals(userDto.getEmail())) {
-                    if (passwordEncoder.matches(userDto.getPassword(), existingUser.getPassword())) {
-                        return toDto(existingUser);
-                    }
-                }
+            if (passwordEncoder.matches(userDto.getPassword(), existingUser.getPassword())) {
+                return toDto(existingUser);
+            } else {
+                throw new PasswordIncorrectException(userDto.getEmail());
             }
         }
-        throw new PasswordIncorrectException(userDto.getEmail());
-    }
-
-    private boolean doesUserExist(UserDto userDto) {
-        for (User existingUser : getAllUsers()) {
-            if (existingUser.getEmail().equals(userDto.getEmail())) {
-                return true;
-            }
-        }
-        return false;
     }
 
 
-    public boolean userAlreadyExists(User userToBeCreated) {
-        for (User existingUser : getAllUsers()) {
-            if (existingUser.getEmail().equals(userToBeCreated.getEmail())) {
-                return true;
-            }
+    private boolean userAlreadyExists(String email) {
+
+        if (userDao.findUserByEmail(email) != null) {
+            return true;
         }
         return false;
     }
