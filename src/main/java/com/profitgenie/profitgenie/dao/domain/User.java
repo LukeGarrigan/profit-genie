@@ -13,6 +13,9 @@ public class User extends AbstractEntity {
     @Column
     private String password;
 
+    @Column
+    private Boolean support;
+
     public User(){}
 
     public String getEmail() {
@@ -29,5 +32,13 @@ public class User extends AbstractEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Boolean getSupport() {
+        return support;
+    }
+
+    public void setSupport(Boolean support) {
+        this.support = support;
     }
 }

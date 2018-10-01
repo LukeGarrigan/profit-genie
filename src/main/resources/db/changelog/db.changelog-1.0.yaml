@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: lg
+      changes:
+        - addColumn:
+            tableName: PG_user
+            columns:
+              - column:
+                  name: support
+                  type: boolean
