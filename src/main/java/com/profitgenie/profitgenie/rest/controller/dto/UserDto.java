@@ -8,6 +8,7 @@ public class UserDto implements Serializable {
     private String password;
     private String email;
     private long userId;
+    private Boolean support;
 
     public long getUserId() {
         return userId;
@@ -38,5 +39,13 @@ public class UserDto implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Boolean getSupport() {
+        return support;
+    }
+
+    public void setSupport(Boolean support) {
+        this.support = support;
     }
 }

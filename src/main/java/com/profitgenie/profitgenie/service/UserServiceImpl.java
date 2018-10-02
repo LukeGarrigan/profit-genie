@@ -63,6 +63,15 @@ public class UserServiceImpl implements UserService, DtoDomainConversion<UserDto
         }
     }
 
+    @Override
+    public boolean isUserSupport(long id) {
+        User user = userDao.getOne(id);
+        if (user != null) {
+            return user.getSupport();
+        }
+        return false;
+    }
+
 
     private boolean userAlreadyExists(String email) {
 
