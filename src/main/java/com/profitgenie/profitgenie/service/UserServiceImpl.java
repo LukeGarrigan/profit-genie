@@ -19,7 +19,6 @@ public class UserServiceImpl implements UserService, DtoDomainConversion<UserDto
     @Autowired
     private ModelMapper modelMapper;
 
-
     @Autowired
     private UserDao userDao;
 
@@ -33,6 +32,7 @@ public class UserServiceImpl implements UserService, DtoDomainConversion<UserDto
         User user = new User();
         user.setEmail(userDto.getEmail());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setSupport(userDto.getSupport());
 
         if (!userAlreadyExists(user.getEmail())) {
             userDao.save(user);
@@ -66,10 +66,7 @@ public class UserServiceImpl implements UserService, DtoDomainConversion<UserDto
     @Override
     public boolean isUserSupport(long id) {
         User user = userDao.getOne(id);
-        if (user != null) {
-            return user.getSupport();
-        }
-        return false;
+        return user.getSupport();
     }
 
 

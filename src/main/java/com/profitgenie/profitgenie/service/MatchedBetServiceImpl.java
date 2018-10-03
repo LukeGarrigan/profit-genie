@@ -2,11 +2,14 @@ package com.profitgenie.profitgenie.service;
 
 import com.profitgenie.profitgenie.dao.domain.MatchedBet;
 import com.profitgenie.profitgenie.dao.repository.MatchedBetDao;
+import com.profitgenie.profitgenie.exceptions.InvalidURLException;
 import com.profitgenie.profitgenie.rest.controller.dto.MatchedBetDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +30,7 @@ public class MatchedBetServiceImpl implements MatchedBetService, DtoDomainConver
 
         MatchedBet matchedBet = new MatchedBet();
 
+        checkValidURL(matchedBetDto.getAffiliateLink());
         matchedBet.setAffiliateLink(matchedBetDto.getAffiliateLink());
         matchedBet.setDescription(matchedBetDto.getDescription());
         matchedBet.setPathToImage(matchedBetDto.getPathToImage());
@@ -40,6 +44,17 @@ public class MatchedBetServiceImpl implements MatchedBetService, DtoDomainConver
         // now has an id
         matchedBetDto.setId(matchedBet.getId());
         return matchedBetDto;
+    }
+
+    private void checkValidURL(String affiliateLink) {
+
+        try {
+            URL url = new URL(affiliateLink);
+        } catch(MalformedURLException malformedURLException) {
+            throw new InvalidURLException(affiliateLink);
+        }
+
+
     }
 
 

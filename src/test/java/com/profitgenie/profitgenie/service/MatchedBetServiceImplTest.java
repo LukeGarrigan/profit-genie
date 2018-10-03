@@ -2,6 +2,7 @@ package com.profitgenie.profitgenie.service;
 
 import com.profitgenie.profitgenie.dao.domain.MatchedBet;
 import com.profitgenie.profitgenie.dao.repository.MatchedBetDao;
+import com.profitgenie.profitgenie.exceptions.InvalidURLException;
 import com.profitgenie.profitgenie.rest.controller.dto.MatchedBetDto;
 import org.junit.Before;
 import org.junit.Test;
@@ -127,10 +128,22 @@ public class MatchedBetServiceImplTest {
     }
 
 
+    @Test(expected = InvalidURLException.class)
+    public void testFailInvalidURL() {
+        // given
+        MatchedBetDto matchedBetDto = new MatchedBetDto();
+        matchedBetDto.setSequence(0);
+        matchedBetDto.setAffiliateLink("www.google.com");
+        matchedBetDto.setDescription("This is a description on how to make some moneys");
+        // when
+        matchedBetService.createMatchedBet(matchedBetDto);
+    }
+
+
     private MatchedBetDto getMatchedBetDto() {
         MatchedBetDto matchedBetDto = new MatchedBetDto();
         matchedBetDto.setSequence(0);
-        matchedBetDto.setAffiliateLink("google.com");
+        matchedBetDto.setAffiliateLink("https://www.google.com");
         matchedBetDto.setDescription("This is a description on how to make some moneys");
         return matchedBetDto;
     }
@@ -139,19 +152,19 @@ public class MatchedBetServiceImplTest {
     private void setMatchedBetList() {
         MatchedBet matchedBet = new MatchedBet();
         matchedBet.setSequence(0);
-        matchedBet.setAffiliateLink("google.com");
+        matchedBet.setAffiliateLink("https://www.google.com");
         matchedBet.setDescription("This is a description on how to make some moneys");
         matchedBetList.add(matchedBet);
 
         MatchedBet matchedBet2 = new MatchedBet();
         matchedBet2.setSequence(1);
-        matchedBet2.setAffiliateLink("skybet.com");
+        matchedBet2.setAffiliateLink("https://www.skybet.com");
         matchedBet2.setDescription("This is a description on how to make some moneys");
         matchedBetList.add(matchedBet2);
 
         MatchedBet matchedBet3 = new MatchedBet();
         matchedBet3.setSequence(2);
-        matchedBet3.setAffiliateLink("bet365.com");
+        matchedBet3.setAffiliateLink("https://www.bet365.com");
         matchedBet3.setDescription("This will make you £2302");
         matchedBetList.add(matchedBet3);
 

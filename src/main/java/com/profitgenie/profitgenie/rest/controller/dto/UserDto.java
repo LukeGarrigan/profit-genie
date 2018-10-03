@@ -7,16 +7,7 @@ public class UserDto implements Serializable {
     private long id;
     private String password;
     private String email;
-    private long userId;
     private Boolean support;
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
 
     public long getId() {
         return id;
