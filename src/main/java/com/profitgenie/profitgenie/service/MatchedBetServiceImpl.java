@@ -64,7 +64,9 @@ public class MatchedBetServiceImpl implements MatchedBetService, DtoDomainConver
 
         List<MatchedBetDto> matchedBetDtos = new ArrayList<>();
         for (MatchedBet allMatchedBet : allMatchedBets) {
-            matchedBetDtos.add(toDto(allMatchedBet));
+            MatchedBetDto matchedBetDto = toDto(allMatchedBet);
+            matchedBetDto.setPathToImage("images/betting/sky-bet.png");
+            matchedBetDtos.add(matchedBetDto);
         }
 
         sortMatchedBets(matchedBetDtos);
