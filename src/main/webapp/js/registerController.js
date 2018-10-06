@@ -1,4 +1,4 @@
-app.controller("registerController", function ($scope, $http) {
+app.controller("registerController", function ($scope, $http, $window) {
 
 
     $scope.user = {};
@@ -35,6 +35,7 @@ app.controller("registerController", function ($scope, $http) {
         }).then(function mySuccess(response) {
             $scope.$parent.userId = response.data.id;
             $scope.isAuthorised = true;
+            $window.location.href = '/members-page.html';
         }, function myFailure(response) {
             $scope.registerErrorMessage = response.data.message;
         });
@@ -55,6 +56,7 @@ app.controller("registerController", function ($scope, $http) {
         }).then(function mySuccess(response) {
             $scope.$parent.userId = response.data.id;
             $scope.isAuthorised = true;
+            $window.location.href = '/members-page.html';
         }, function errorCallback(response) {
             $scope.loginErrorMessage = response.data.message;
         });
