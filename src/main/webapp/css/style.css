@@ -1514,3 +1514,15 @@ input[type="text"] {
   right: 1em;
   cursor: pointer;
 }
+
+
+.logo {
+  /*2480*/
+  /*3508*/
+  display: block;
+  margin-left:auto;
+  margin-right:auto;
+  text-align: center;
+  height: 248px;
+  width: 350px;
+}
