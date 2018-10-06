@@ -12,18 +12,16 @@ public class MainSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                    .antMatchers("/", "/user/login")
-                    .permitAll()
-                    .antMatchers("/members-page.html/**")
-                    .denyAll()
+        http
+            .authorizeRequests()
+                .antMatchers("/", "/index.html", "/components/**", "/css/**", "/js/**", "/fonts/**", "/images/**", "/.sass-cache/**", "/services.html").permitAll()
+                .antMatchers("/user/login").permitAll()
+                .anyRequest().authenticated()  // think this means if logged in then go anywhere
                 .and()
-                    .formLogin()
-                    .loginPage("/login.html")
-                    .loginProcessingUrl("/user/login")
-                    .permitAll()
+            .formLogin()
+                .loginPage("/login.html").permitAll()
                 .and()
-                    .logout()
-                    .permitAll();
-    }
+            .logout()
+                .permitAll();
+}
 }

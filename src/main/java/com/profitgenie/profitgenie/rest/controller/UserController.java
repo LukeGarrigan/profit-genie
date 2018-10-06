@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public UserDto createUser(@RequestBody UserDto userDto) {
         return userService.createUser(userDto);
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json")
     public UserDto loginUser(@RequestBody UserDto userDto) {
         return userService.loginUser(userDto);
     }
