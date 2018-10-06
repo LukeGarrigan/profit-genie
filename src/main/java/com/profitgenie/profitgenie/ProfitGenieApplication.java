@@ -1,5 +1,6 @@
 package com.profitgenie.profitgenie;
 
+import com.sun.tracing.ProbeName;
 import liquibase.integration.spring.SpringLiquibase;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
@@ -25,6 +26,7 @@ public class ProfitGenieApplication {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+
 
 
 

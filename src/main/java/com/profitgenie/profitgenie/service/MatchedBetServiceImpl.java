@@ -47,14 +47,11 @@ public class MatchedBetServiceImpl implements MatchedBetService, DtoDomainConver
     }
 
     private void checkValidURL(String affiliateLink) {
-
         try {
-            URL url = new URL(affiliateLink);
+            new URL(affiliateLink);
         } catch(MalformedURLException malformedURLException) {
             throw new InvalidURLException(affiliateLink);
         }
-
-
     }
 
 
@@ -65,7 +62,7 @@ public class MatchedBetServiceImpl implements MatchedBetService, DtoDomainConver
         List<MatchedBetDto> matchedBetDtos = new ArrayList<>();
         for (MatchedBet allMatchedBet : allMatchedBets) {
             MatchedBetDto matchedBetDto = toDto(allMatchedBet);
-            matchedBetDto.setPathToImage("images/betting/sky-bet.png");
+            matchedBetDto.setPathToImage("/resources/sky-bet.png");
             matchedBetDtos.add(matchedBetDto);
         }
 

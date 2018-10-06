@@ -1,3 +1,5 @@
+server:
+  port: 5000
 spring:
   jpa:
     database-platform: org.hibernate.dialect.SQLServer2012Dialect
@@ -7,3 +9,4 @@ spring:
     url: jdbc:sqlserver://localhost;databaseName=profit-genie;sendStringParametersAsUnicode=false
     username: programmer
     password: test
+
