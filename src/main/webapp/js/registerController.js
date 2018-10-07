@@ -44,11 +44,12 @@ app.controller("registerController", function ($scope, $http, $window) {
 
 
     $scope.loginUser = function () {
+        $scope.user.user = $scope.email;
         $scope.user.password = $scope.password;
-        $scope.user.email = $scope.email;
+
 
         var userAsJson = JSON.stringify($scope.user);
-        $http.post("user/login", userAsJson, {
+        $http.post("/login", userAsJson, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'

@@ -38,21 +38,28 @@ public class MainSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
-        http.sessionManagement()
-                .maximumSessions(1)
-                .expiredUrl("/login.html")
-                .and()
-                .invalidSessionUrl("/login.html");
-        http.sessionManagement()
-                .sessionFixation().migrateSession();
+        http
+              .csrf().disable();
+
         http
                 .authorizeRequests()
-                .antMatchers("/", "/index.html", "/components/**", "/css/**", "/js/**", "/fonts/**", "/images/**", "/.sass-cache/**", "/services.html").permitAll()
-                .anyRequest().authenticated()  // think this means if logged in then go anywhere
-                .and()
-                .formLogin()
-                .loginPage("/login.html").permitAll();
+                .antMatchers("/", "/**", "/login/**", "/index.html", "/login.html", "/components/**", "/css/**", "/js/**", "/fonts/**", "/images/**", "/.sass-cache/**", "/services.html").permitAll()
+                .anyRequest().authenticated();
+
+
+        http.formLogin()
+                .loginPage("/login")
+                .usernameParameter("user")
+                .passwordParameter("password");
+
+        //        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
+//        http.sessionManagement()
+//                .maximumSessions(1)
+//                .expiredUrl("/login.html")
+//                .and()
+//                .invalidSessionUrl("/login.html");
+//        http.sessionManagement()
+//                .sessionFixation().migrateSession();
 
     }
 
