@@ -9,6 +9,7 @@ spring:
     url: jdbc:sqlserver://localhost;databaseName=profit-genie;sendStringParametersAsUnicode=false
     username: programmer
     password: test
-
+  liquibase:
+    enabled: false
 
 

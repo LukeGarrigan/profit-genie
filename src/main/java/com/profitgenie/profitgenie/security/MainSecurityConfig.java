@@ -39,27 +39,19 @@ public class MainSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-              .csrf().disable();
+                .csrf().disable();
 
         http
                 .authorizeRequests()
                 .antMatchers("/", "/**", "/login/**", "/index.html", "/login.html", "/components/**", "/css/**", "/js/**", "/fonts/**", "/images/**", "/.sass-cache/**", "/services.html").permitAll()
-                .anyRequest().authenticated();
-
-
-        http.formLogin()
-                .loginPage("/login")
-                .usernameParameter("user")
+                .anyRequest().authenticated().
+        and()
+                .formLogin()
+                .loginProcessingUrl("/api/authentication")
+                .usernameParameter("username")
                 .passwordParameter("password");
 
-        //        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
-//        http.sessionManagement()
-//                .maximumSessions(1)
-//                .expiredUrl("/login.html")
-//                .and()
-//                .invalidSessionUrl("/login.html");
-//        http.sessionManagement()
-//                .sessionFixation().migrateSession();
+
 
     }
 
@@ -83,3 +75,12 @@ public class MainSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/user/**");
     }
 }
+
+//        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
+//        http.sessionManagement()
+//                .maximumSessions(1)
+//                .expiredUrl("/login.html")
+//                .and()
+//                .invalidSessionUrl("/login.html");
+//        http.sessionManagement()
+//                .sessionFixation().migrateSession();

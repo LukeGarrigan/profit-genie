@@ -92,6 +92,7 @@
 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
+			<scope>runtime</scope>
 			<version>3.5.3</version>
 		</dependency>
 

@@ -3,13 +3,14 @@ package com.profitgenie.profitgenie.security;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
 import com.profitgenie.profitgenie.dao.domain.User;
 import org.springframework.util.Assert;
 
-public class UserDetailsImpl implements UserDetails {
+public class UserDetailsImpl implements UserDetails, Serializable {
 
 
     private User user;

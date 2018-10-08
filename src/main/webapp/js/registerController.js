@@ -44,16 +44,16 @@ app.controller("registerController", function ($scope, $http, $window) {
 
 
     $scope.loginUser = function () {
-        $scope.user.user = $scope.email;
+        $scope.user.username = $scope.email;
         $scope.user.password = $scope.password;
 
 
-        var userAsJson = JSON.stringify($scope.user);
-        $http.post("/login", userAsJson, {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
+        // var userAsJson = JSON.stringify($scope.user);
+        $http.post("/api/authentication", $scope.user, {
+            // headers: {
+            //     'Accept': 'application/json',
+            //     'Content-Type': 'application/json'
+            // }
         }).then(function mySuccess(response) {
             $scope.$parent.userId = response.data.id;
             $scope.isAuthorised = true;
