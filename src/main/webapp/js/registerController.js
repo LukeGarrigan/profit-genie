@@ -46,21 +46,31 @@ app.controller("registerController", function ($scope, $http, $window) {
     $scope.loginUser = function () {
         $scope.user.username = $scope.email;
         $scope.user.password = $scope.password;
+        var data = {
+            username: $scope.user.username,
+            password: $scope.user.password
+        }
+      $http({
+        url: '/api/authentication',
+        method: "POST",
+        data:  data
+      })
 
+        // $http.post("/api/authentication", data);
 
         // var userAsJson = JSON.stringify($scope.user);
-        $http.post("/api/authentication", $scope.user, {
-            // headers: {
-            //     'Accept': 'application/json',
-            //     'Content-Type': 'application/json'
-            // }
-        }).then(function mySuccess(response) {
-            $scope.$parent.userId = response.data.id;
-            $scope.isAuthorised = true;
-            $window.location.href = '/members-page.html';
-        }, function errorCallback(response) {
-            $scope.loginErrorMessage = response.data.message;
-        });
+        //  {
+        //     // headers: {
+        //     //     'Accept': 'application/json',
+        //     //     'Content-Type': 'application/json'
+        //     // }
+        // }).then(function mySuccess(response) {
+        //     $scope.$parent.userId = response.data.id;
+        //     $scope.isAuthorised = true;
+        //     $window.location.href = '/members-page.html';
+        // }, function errorCallback(response) {
+        //     $scope.loginErrorMessage = response.data.message;
+        // });
     };
 
 
