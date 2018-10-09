@@ -45,38 +45,21 @@ app.controller("registerController", function ($scope, $http, $window) {
 
     $scope.loginUser = function () {
 
-        var  headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
-
         $http({
             method: 'POST',
             url: '/api/authentication',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             data: 'username='+$scope.email+'&password='+$scope.password
+        }).then(function mySuccess(response) {
+
+          $window.location.href = response.data;
+
+          $scope.loginErrorMessage = "Your login attempt was not successful, try again";
+        }, function errorCallback(response) {
+          $scope.loginErrorMessage = response.data.message;
         });
 
 
-        // $http.post('/api/authentication', body, {headers: headers});
-          // $http({
-          //   url: '/api/authentication',
-          //   method: "POST", headers:
-          //   data:  body
-          // })
-
-        // $http.post("/api/authentication", data);
-
-        // var userAsJson = JSON.stringify($scope.user);
-        //  {
-        //     // headers: {
-        //     //     'Accept': 'application/json',
-        //     //     'Content-Type': 'application/json'
-        //     // }
-        // }).then(function mySuccess(response) {
-        //     $scope.$parent.userId = response.data.id;
-        //     $scope.isAuthorised = true;
-        //     $window.location.href = '/members-page.html';
-        // }, function errorCallback(response) {
-        //     $scope.loginErrorMessage = response.data.message;
-        // });
     };
 
 

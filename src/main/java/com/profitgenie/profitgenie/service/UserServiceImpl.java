@@ -4,12 +4,9 @@ package com.profitgenie.profitgenie.service;
 import com.profitgenie.profitgenie.dao.domain.User;
 import com.profitgenie.profitgenie.dao.repository.UserDao;
 import com.profitgenie.profitgenie.exceptions.EmailAlreadyRegistered;
-import com.profitgenie.profitgenie.exceptions.PasswordIncorrectException;
-import com.profitgenie.profitgenie.exceptions.UserNotFoundException;
 import com.profitgenie.profitgenie.rest.controller.dto.UserDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -48,21 +45,6 @@ public class UserServiceImpl implements UserService, DtoDomainConversion<UserDto
         return userDao.getOne(id);
     }
 
-    @Override
-    public UserDto loginUser(UserDto userDto) {
-
-        User existingUser = userDao.findUserByEmail(userDto.getEmail());
-
-        if (existingUser == null) {
-            throw new UserNotFoundException(userDto.getEmail());
-        } else {
-            if (passwordEncoder.matches(userDto.getPassword(), existingUser.getPassword())) {
-                return toDto(existingUser);
-            } else {
-                throw new PasswordIncorrectException(userDto.getEmail());
-            }
-        }
-    }
 
     @Override
     public boolean isUserSupport(long id) {

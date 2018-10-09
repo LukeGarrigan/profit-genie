@@ -31,8 +31,8 @@ public class MainSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    public PasswordEncoderImpl passwordEncoder() {
+        return new PasswordEncoderImpl();
     }
 
     @Override
@@ -43,14 +43,14 @@ public class MainSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers("/", "/**", "/login/**", "/index.html", "/login.html", "/components/**", "/css/**", "/js/**", "/fonts/**", "/images/**", "/.sass-cache/**", "/services.html").permitAll()
+                .antMatchers("/", "/**" ,"/login/**", "/index.html", "/login.html", "/components/**", "/css/**", "/js/**", "/fonts/**", "/images/**", "/.sass-cache/**", "/services.html").permitAll()
                 .anyRequest().authenticated().
         and()
                 .formLogin()
                 .loginProcessingUrl("/api/authentication")
                 .usernameParameter("username")
-                .passwordParameter("password");
-
+                .passwordParameter("password")
+                .defaultSuccessUrl("/members-page.html");
 
 
     }
