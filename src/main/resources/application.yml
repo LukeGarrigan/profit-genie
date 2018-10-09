@@ -3,12 +3,14 @@ server:
 spring:
   jpa:
     database-platform: org.hibernate.dialect.SQLServer2012Dialect
-
+    hibernate:
+      ddl-auto: create-drop
   datasource:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     url: jdbc:sqlserver://localhost;databaseName=profit-genie;sendStringParametersAsUnicode=false
     username: programmer
     password: test
+
   liquibase:
     enabled: false
 

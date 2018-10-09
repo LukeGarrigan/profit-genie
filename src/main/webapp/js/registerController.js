@@ -44,17 +44,23 @@ app.controller("registerController", function ($scope, $http, $window) {
 
 
     $scope.loginUser = function () {
-        $scope.user.username = $scope.email;
-        $scope.user.password = $scope.password;
-        var data = {
-            username: $scope.user.username,
-            password: $scope.user.password
-        }
-      $http({
-        url: '/api/authentication',
-        method: "POST",
-        data:  data
-      })
+
+        var  headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
+
+        $http({
+            method: 'POST',
+            url: '/api/authentication',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            data: 'username='+$scope.email+'&password='+$scope.password
+        });
+
+
+        // $http.post('/api/authentication', body, {headers: headers});
+          // $http({
+          //   url: '/api/authentication',
+          //   method: "POST", headers:
+          //   data:  body
+          // })
 
         // $http.post("/api/authentication", data);
 
