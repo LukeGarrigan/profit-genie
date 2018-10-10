@@ -2,7 +2,7 @@ package com.profitgenie.profitgenie.exceptions;
 
 public class PasswordIncorrectException extends RuntimeException {
 
-    public PasswordIncorrectException(String email) {
-        super("Password for " + email + " is incorrect");
+    public PasswordIncorrectException() {
+        super("Incorrect credentials entered");
     }
 }

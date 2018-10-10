@@ -44,17 +44,21 @@ app.controller("registerController", function ($scope, $http, $window) {
 
 
     $scope.loginUser = function () {
+
         $http({
             method: 'POST',
             url: '/api/authentication',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            data: 'username=' + $scope.email + '&password=' + $scope.password
+            data: 'username='+$scope.email+'&password='+$scope.password
         }).then(function mySuccess(response) {
-            $scope.loginErrorMessage = response.data;
-            $window.location.href = '/members-page.html';
-        },  function errorCallback(response) {
-            $scope.loginErrorMessage = response.data.message;
+
+          $window.location.href = '/members-page.html';
+
+          $scope.loginErrorMessage = "Your login attempt was not successful, try again";
+        }, function errorCallback(response) {
+          $scope.loginErrorMessage = response.data.message;
         });
+
     };
 
 

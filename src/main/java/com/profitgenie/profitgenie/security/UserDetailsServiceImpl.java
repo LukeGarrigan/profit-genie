@@ -2,6 +2,7 @@ package com.profitgenie.profitgenie.security;
 
 import com.profitgenie.profitgenie.dao.domain.User;
 import com.profitgenie.profitgenie.dao.repository.UserDao;
+import com.profitgenie.profitgenie.exceptions.PasswordIncorrectException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,8 +26,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         User userByEmail = userDao.findUserByEmail(user);
 
-        UserDetailsImpl userDetails = new UserDetailsImpl(userByEmail, httpSession.getId());
+        if (userByEmail == null) {
+            throw new PasswordIncorrectException();
+        }
 
-        return userDetails;
+        try {
+            UserDetailsImpl userDetails = new UserDetailsImpl(userByEmail, httpSession.getId());
+            return userDetails;
+        } catch (Exception e) {
+            throw new PasswordIncorrectException();
+        }
+
     }
 }
