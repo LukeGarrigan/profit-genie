@@ -52,13 +52,12 @@ app.controller("registerController", function ($scope, $http, $window) {
             data: 'username='+$scope.email+'&password='+$scope.password
         }).then(function mySuccess(response) {
 
-          $window.location.href = response.data;
+          $window.location.href = '/members-page.html';
 
           $scope.loginErrorMessage = "Your login attempt was not successful, try again";
         }, function errorCallback(response) {
           $scope.loginErrorMessage = response.data.message;
         });
-
 
     };
 
