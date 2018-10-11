@@ -31,8 +31,8 @@ public class MainSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Bean
-    public PasswordEncoderImpl passwordEncoder() {
-        return new PasswordEncoderImpl();
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Override
