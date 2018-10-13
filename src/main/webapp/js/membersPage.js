@@ -9,6 +9,7 @@ membersPage.controller("membersPageController", function ($scope, $http) {
   $scope.title = "";
   $scope.sequence = 0;
   $scope.matchedBets = [];
+  $scope.errorMessage = "";
 
 
   $scope.image = {};
@@ -48,6 +49,7 @@ membersPage.controller("membersPageController", function ($scope, $http) {
 
   $scope.submitMatchedBet = function () {
     var form = document.getElementById("create-matched-bet");
+    $scope.errorMessage = " ";
     form.reset();
 
 
@@ -66,7 +68,10 @@ membersPage.controller("membersPageController", function ($scope, $http) {
     }).then(function response(response) {
       $scope.matchedBets.unshift(response.data);
       console.log($scope.matchedBets);
+    },function errorCallback(response) {
+      $scope.errorMessage = response.data.message;
     });
+
   }
 
 

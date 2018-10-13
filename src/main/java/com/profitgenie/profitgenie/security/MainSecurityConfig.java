@@ -43,16 +43,21 @@ public class MainSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers("/", "/login/**", "/index.html", "/login.html", "/components/**", "/css/**", "/js/**", "/fonts/**", "/images/**", "/.sass-cache/**", "/services.html").permitAll()
+                .antMatchers("/", "/login/**", "/index.html", "/login.html", "/components/**", "/css/**", "/js/**", "/fonts/**", "/images/**", "/.sass-cache/**", "/services.html").permitAll();
 
-                .anyRequest().authenticated().
-        and()
+        http
                 .formLogin()
                 .loginPage("/login.html")
                 .loginProcessingUrl("/api/authentication")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/members-page.html");
+
+
+        http
+                .authorizeRequests()
+                .antMatchers("/admin-page.html")
+                .hasRole("SUPPORT");
 
 
     }
