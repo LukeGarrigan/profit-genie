@@ -48,6 +48,7 @@ public class MainSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated().
         and()
                 .formLogin()
+                .loginPage("/login.html")
                 .loginProcessingUrl("/api/authentication")
                 .usernameParameter("username")
                 .passwordParameter("password")

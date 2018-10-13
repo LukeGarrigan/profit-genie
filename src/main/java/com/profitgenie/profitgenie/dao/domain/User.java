@@ -16,9 +16,6 @@ public class User extends AbstractEntity {
     @Column
     private Boolean support;
 
-
-
-
     public User(){}
 
     public String getEmail() {

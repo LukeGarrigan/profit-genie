@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService, DtoDomainConversion<UserDto
         User user = new User();
         user.setEmail(userDto.getEmail());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        user.setSupport(userDto.getSupport());
+        user.setSupport(false);
 
         if (!userAlreadyExists(user.getEmail())) {
             userDao.save(user);

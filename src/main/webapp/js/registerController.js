@@ -51,10 +51,7 @@ app.controller("registerController", function ($scope, $http, $window) {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             data: 'username='+$scope.email+'&password='+$scope.password
         }).then(function mySuccess(response) {
-
           $window.location.href = '/members-page.html';
-
-          $scope.loginErrorMessage = "Your login attempt was not successful, try again";
         }, function errorCallback(response) {
           $scope.loginErrorMessage = response.data.message;
         });

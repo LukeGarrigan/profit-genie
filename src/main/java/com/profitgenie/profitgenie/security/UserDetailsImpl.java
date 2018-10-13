@@ -1,11 +1,14 @@
 package com.profitgenie.profitgenie.security;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 import com.profitgenie.profitgenie.dao.domain.User;
 import org.springframework.util.Assert;
@@ -27,7 +30,17 @@ public class UserDetailsImpl implements UserDetails, Serializable {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new ArrayList<>();
+
+        final List<GrantedAuthority> authorities = new LinkedList<>();
+
+        if(isEnabled()) {
+            if (this.user != null && this.user.getSupport()) {
+                authorities.add(new SimpleGrantedAuthority("ROLE_SUPPORT"));
+            }
+        }
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+
+        return authorities;
     }
 
     @Override
