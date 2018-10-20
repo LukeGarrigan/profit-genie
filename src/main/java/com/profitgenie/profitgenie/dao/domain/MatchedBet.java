@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 public class MatchedBet extends AbstractEntity {
 
 
-    @Column
+    @Column(length = 1000)
     private String description;
     @Column
     private String affiliateLink;
@@ -18,6 +18,8 @@ public class MatchedBet extends AbstractEntity {
     private String title;
     @Column
     private long sequence;
+    @Column
+    private String linkLabel;
 
 
     public String getDescription() {
@@ -58,5 +60,13 @@ public class MatchedBet extends AbstractEntity {
 
     public void setSequence(long sequence) {
         this.sequence = sequence;
+    }
+
+    public void setLinkLabel(String linkLabel) {
+        this.linkLabel = linkLabel;
+    }
+
+    public String getLinkLabel() {
+        return linkLabel;
     }
 }

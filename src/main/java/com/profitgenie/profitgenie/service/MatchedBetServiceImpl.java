@@ -36,7 +36,7 @@ public class MatchedBetServiceImpl implements MatchedBetService, DtoDomainConver
         matchedBet.setPathToImage(matchedBetDto.getPathToImage());
         matchedBet.setTitle(matchedBetDto.getTitle());
         matchedBet.setSequence(matchedBetDto.getSequence());
-
+        matchedBet.setLinkLabel(matchedBetDto.getLinkLabel());
         incrementAllOtherSequences();
 
         matchedBetDao.save(matchedBet);

@@ -131,42 +131,30 @@
             <div class="row">
 
                 <div ui-sortable="sortableOptions" ng-model="matchedBets">
-                    <div class="col-md-12" ng-repeat="bet in matchedBets | filter: searchCriteria">
+                    <div class="col-md-12 bland-white" ng-repeat="bet in matchedBets | filter: searchCriteria">
 
                         <div class="work-flex">
-                            <div class="half">
-                                <div class="row no-gutters">
-                                    <div class="col-md-12 col-md-push-12 no-gutters">
-                                        <a href="#" class="work-img"
-                                           style="background-image: url({{bet.pathToImage}});"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="half">
-                                <div class="row no-gutters">
-                                    <div class="col-md-12 col-md-pull-12 no-gutters">
-                                        <div class="display-t desc">
-                                            <div class="display-tc">
-                                                <h2><a href="#">{{bet.title}}</a></h2>
-                                                <p>{{bet.description}}</p>
-                                                <p>Even the all-powerful Pointing has no control about the blind texts
-                                                    it is
-                                                    an almost unorthographic life</p>
 
-                                                <a ng-href="{{bet.affiliateLink}}">Click here</a>
-                                            </div>
 
+                            <div class="row no-gutters">
+                                <div class="col-md-12 no-gutters ">
+                                    <div class="display-t desc">
+                                        <div class="display-tc">
+                                            <h2><a href="#">{{bet.title}}</a></h2>
+                                            <p>{{bet.description}}</p>
+                                            <a ng-href="{{bet.affiliateLink}}">{{bet.linkLabel}}</a>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
+
+
+                            <div class="cross">
+                                <img src="images/cancel-512.png" ng-click="deleteMatchedBet(bet.id)"/>
+                            </div>
+
                         </div>
-
-
-                        <div class="cross">
-                            <img src="images/cancel-512.png" ng-click="deleteMatchedBet(bet.id)"/>
-                        </div>
-
                     </div>
                 </div>
 

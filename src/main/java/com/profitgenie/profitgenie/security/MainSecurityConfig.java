@@ -47,11 +47,12 @@ public class MainSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .formLogin()
-                .loginPage("/login.html")
-                .loginProcessingUrl("/api/authentication")
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .defaultSuccessUrl("/members-page.html");
+                    .loginPage("/login.html")
+                    .loginProcessingUrl("/api/authentication")
+                    .usernameParameter("username")
+                    .passwordParameter("password")
+                    .defaultSuccessUrl("/members-page.html")
+                    .failureForwardUrl("/login.html");
 
 
         http

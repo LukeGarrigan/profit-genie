@@ -8,9 +8,18 @@ public class MatchedBetDto implements Serializable {
     private String affiliateLink;
     private String pathToImage;
     private String title;
+    private String linkLabel;
     private long sequence;
     private long id;
 
+
+    public String getLinkLabel() {
+        return linkLabel;
+    }
+
+    public void setLinkLabel(String linkLabel) {
+        this.linkLabel = linkLabel;
+    }
 
     public String getTitle() {
         return title;

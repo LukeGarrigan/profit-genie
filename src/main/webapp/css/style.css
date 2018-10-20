@@ -1523,6 +1523,13 @@ input[type="text"] {
   margin-left:auto;
   margin-right:auto;
   text-align: center;
-  height: 248px;
-  width: 500px;
+  height: 30%;
+  width: 60%;
 }
+
+.bland-white {
+  background:white;
+  padding:2.5em;
+  margin-top:10px;
+}
+

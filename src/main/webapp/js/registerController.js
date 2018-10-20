@@ -53,7 +53,7 @@ app.controller("registerController", function ($scope, $http, $window) {
         }).then(function mySuccess(response) {
           $window.location.href = '/members-page.html';
         }, function errorCallback(response) {
-          $scope.loginErrorMessage = response.data.message;
+          $scope.loginErrorMessage = "The credentials entered are incorrect";
         });
 
     };

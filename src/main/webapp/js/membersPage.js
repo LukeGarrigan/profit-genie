@@ -10,6 +10,9 @@ membersPage.controller("membersPageController", function ($scope, $http) {
   $scope.sequence = 0;
   $scope.matchedBets = [];
   $scope.errorMessage = "";
+  $scope.imageSrc ="";
+  $scope.linkLabel;
+
 
 
   $scope.image = {};
@@ -58,6 +61,7 @@ membersPage.controller("membersPageController", function ($scope, $http) {
     matchedBetDto.affiliateLink = $scope.affiliateLink;
     matchedBetDto.pathToImage = $scope.pathToImage;
     matchedBetDto.title = $scope.title;
+    matchedBetDto.linkLabel = $scope.linkLabel;
     matchedBetDto.sequence = 0;
     var json = JSON.stringify(matchedBetDto);
     $http.post("matched/create", json, {
