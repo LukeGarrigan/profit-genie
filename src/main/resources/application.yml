@@ -10,6 +10,22 @@ spring:
     url: jdbc:sqlserver://localhost;databaseName=profit-genie;sendStringParametersAsUnicode=false
     username: programmer
     password: test
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: profitgenie88@gmail.com
+    password: profitgenie_1234
+    properties.mail.smtp.auth: true
+    properties.mail.smtp.starttls.enable: true
+    properties.mail.smtp.ssl.trust: smtp.gmail.com
+
+
+
+
+
+
+#spring.mail.properties.mail.smtp.auth=true
+#spring.mail.properties.mail.smtp.starttls.enable=true
 
   liquibase:
     enabled: false

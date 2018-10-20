@@ -1,4 +1,8 @@
 package com.profitgenie.profitgenie.dao.repository;
 
-public class PasswordRestCustom {
+import com.profitgenie.profitgenie.dao.domain.PasswordResetToken;
+
+public interface PasswordRestCustom {
+
+    PasswordResetToken findByToken(String token);
 }

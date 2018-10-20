@@ -43,7 +43,7 @@ public class MainSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers("/", "/login/**", "/index.html", "/login.html", "/components/**", "/css/**", "/js/**", "/fonts/**", "/images/**", "/.sass-cache/**", "/services.html").permitAll();
+                .antMatchers("/", "/login/**", "/index.html", "/login.html", "/components/**", "/css/**", "/js/**", "/fonts/**", "/images/**", "/.sass-cache/**", "/services.html" ,"/user/changePassword**").permitAll();
 
         http
                 .formLogin()
@@ -60,6 +60,17 @@ public class MainSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin-page.html")
                 .hasRole("SUPPORT");
 
+        http
+                .authorizeRequests()
+                .antMatchers("/user/changePassword*", "update-password*")
+                .hasAuthority("CHANGE_PASSWORD_PRIVILEGE");
+
+
+        http.sessionManagement()
+                .maximumSessions(1)
+                .and()
+                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                .sessionFixation().none();
 
     }
 
@@ -77,11 +88,11 @@ public class MainSecurityConfig extends WebSecurityConfigurerAdapter {
         return authProvider;
     }
 
-
-    @Override
-    public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/user/**");
-    }
+//
+//    @Override
+//    public void configure(WebSecurity web) {
+//        web.ignoring().antMatchers("/user/**");
+//    }
 }
 
 //        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);

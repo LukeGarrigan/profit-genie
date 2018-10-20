@@ -1,14 +1,20 @@
 package com.profitgenie.profitgenie.service;
 
 
+import com.profitgenie.profitgenie.dao.domain.PasswordResetToken;
 import com.profitgenie.profitgenie.dao.domain.User;
+import com.profitgenie.profitgenie.dao.repository.PasswordResetDao;
 import com.profitgenie.profitgenie.dao.repository.UserDao;
 import com.profitgenie.profitgenie.exceptions.EmailAlreadyRegistered;
+import com.profitgenie.profitgenie.exceptions.PasswordTooShortException;
 import com.profitgenie.profitgenie.rest.controller.dto.UserDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Calendar;
+import java.util.Date;
 
 @Service
 public class UserServiceImpl implements UserService, DtoDomainConversion<UserDto, User> {
@@ -22,6 +28,9 @@ public class UserServiceImpl implements UserService, DtoDomainConversion<UserDto
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private PasswordResetDao passwordResetDao;
 
 
     @Override
@@ -61,6 +70,36 @@ public class UserServiceImpl implements UserService, DtoDomainConversion<UserDto
         return false;
     }
 
+    @Override
+    public User findUsersByEmail(String userEmail) {
+        return userDao.findUserByEmail(userEmail);
+    }
+
+    @Override
+    public void createPasswordResetTokenForUser(User user, String token) {
+        PasswordResetToken resetToken = new PasswordResetToken();
+        resetToken.setUser(user);
+        resetToken.setToken(token);
+
+        Calendar calendar =  Calendar.getInstance();
+        calendar.setTime(calendar.getTime());
+        calendar.add(Calendar.HOUR, 24);
+        resetToken.setExpiryDate(calendar.getTime());
+        passwordResetDao.save(resetToken);
+    }
+
+    @Override
+    public void changeUserPassword(User user, String password) {
+        user.setPassword(passwordEncoder.encode(password));
+        userDao.save(user);
+    }
+
+    @Override
+    public void checkPasswordComplexEnough(String password) {
+        if (password.length() < 8) {
+            throw new PasswordTooShortException();
+        }
+    }
 
     @Override
     public UserDto toDto(User domain) {

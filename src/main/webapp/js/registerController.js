@@ -7,6 +7,18 @@ app.controller("registerController", function ($scope, $http, $window) {
     $scope.isAuthorised = false;
     $scope.loginErrorMessage = "";
     $scope.registerErrorMessage = "";
+    $scope.forgotPasswordMessage = "";
+
+    $scope.forgotPassword = function() {
+      $http.post("user/resetPassword", $scope.email, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+
+      $scope.forgotPasswordMessage = "Email sent to " + $scope.email
+    };
 
     $scope.registerUser = function () {
         if (!passwordsMatch()) {
@@ -41,6 +53,23 @@ app.controller("registerController", function ($scope, $http, $window) {
         });
 
     };
+
+    $scope.updatePassword = function() {
+      if (!passwordsMatch()) {
+        $scope.registerErrorMessage = "Passwords do not match";
+      } else {
+        $http.post("user/savePassword", $scope.password, {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        }).then(function mySuccess(response){
+          $window.location.href = '/members-page.html';
+        }, function errorCallback(response) {
+          $scope.loginErrorMessage = response.data.message;
+        });
+      }
+    }
 
 
     $scope.loginUser = function () {

@@ -13,7 +13,13 @@ public interface UserService {
 
     boolean isUserSupport(long id);
 
+    User findUsersByEmail(String userEmail);
 
+    void createPasswordResetTokenForUser(User user, String token);
+
+    void changeUserPassword(User user, String password);
+
+    void checkPasswordComplexEnough(String password);
 }
 
 
