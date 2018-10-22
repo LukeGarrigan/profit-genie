@@ -6,6 +6,7 @@ import com.profitgenie.profitgenie.exceptions.NoCurrentSessionException;
 import com.profitgenie.profitgenie.exceptions.PasswordTooShortException;
 import com.profitgenie.profitgenie.exceptions.UserNotFoundException;
 import com.profitgenie.profitgenie.rest.controller.dto.UserDto;
+import com.profitgenie.profitgenie.security.PasswordSecurityService;
 import com.profitgenie.profitgenie.service.EmailServiceImpl;
 import com.profitgenie.profitgenie.service.SecurityService;
 import com.profitgenie.profitgenie.service.UserService;
@@ -41,9 +42,14 @@ public class UserController {
     @Autowired
     private SecurityService securityService;
 
+    @Autowired
+    private PasswordSecurityService passwordSecurityService;
+
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public UserDto createUser(@RequestBody UserDto userDto, HttpServletRequest request, HttpServletResponse response) {
+        passwordSecurityService.checkPasswordComplexEnough(userDto.getPassword());
+
         UserDto user = userService.createUser(userDto);
         authenticateUserAndSetSession(userDto, request);
         return user;
@@ -52,8 +58,6 @@ public class UserController {
     private void authenticateUserAndSetSession(UserDto user, HttpServletRequest request) {
         String username = user.getEmail();
         String password = user.getPassword();
-
-        userService.checkPasswordComplexEnough(password);
 
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
 
@@ -110,7 +114,7 @@ public class UserController {
     public void savePassword(HttpServletRequest request, Locale locale, @RequestBody String password) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        userService.checkPasswordComplexEnough(password);
+        passwordSecurityService.checkPasswordComplexEnough(password);
 
         if (user == null) {
             throw new NoCurrentSessionException();

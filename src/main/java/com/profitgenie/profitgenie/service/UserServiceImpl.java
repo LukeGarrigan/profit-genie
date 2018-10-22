@@ -94,12 +94,7 @@ public class UserServiceImpl implements UserService, DtoDomainConversion<UserDto
         userDao.save(user);
     }
 
-    @Override
-    public void checkPasswordComplexEnough(String password) {
-        if (password.length() < 8) {
-            throw new PasswordTooShortException();
-        }
-    }
+
 
     @Override
     public UserDto toDto(User domain) {

@@ -4,7 +4,7 @@ public class PasswordTooShortException extends RuntimeException {
 
 
     public PasswordTooShortException() {
-        super("Password must be atleast 8 characters long");
+        super("Password must be atleast 8 characters long and be alphanumeric");
     }
 
 }
