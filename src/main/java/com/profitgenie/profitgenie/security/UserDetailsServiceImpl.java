@@ -19,7 +19,6 @@ public class UserDetailsServiceImpl implements UserDetailsService, PasswordSecur
     @Resource
     private HttpSession httpSession;
 
-
     @Resource
     private UserDao userDao;
 

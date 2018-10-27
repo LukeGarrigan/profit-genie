@@ -3,11 +3,11 @@ package com.profitgenie.profitgenie.rest.controller;
 
 import com.profitgenie.profitgenie.dao.domain.User;
 import com.profitgenie.profitgenie.exceptions.NoCurrentSessionException;
-import com.profitgenie.profitgenie.exceptions.PasswordTooShortException;
 import com.profitgenie.profitgenie.exceptions.UserNotFoundException;
 import com.profitgenie.profitgenie.rest.controller.dto.UserDto;
 import com.profitgenie.profitgenie.security.PasswordSecurityService;
 import com.profitgenie.profitgenie.service.EmailServiceImpl;
+import com.profitgenie.profitgenie.service.MembershipService;
 import com.profitgenie.profitgenie.service.SecurityService;
 import com.profitgenie.profitgenie.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Locale;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -44,6 +44,9 @@ public class UserController {
 
     @Autowired
     private PasswordSecurityService passwordSecurityService;
+
+    @Autowired
+    private MembershipService membershipService;
 
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -124,7 +127,13 @@ public class UserController {
     }
 
 
+    @RequestMapping(value = "/welcome", method = RequestMethod.GET)
+    public void welcomeMember(@RequestParam Map<String, String> data) {
 
+
+
+        membershipService.processNewMembership(data);
+    }
 
 
 }

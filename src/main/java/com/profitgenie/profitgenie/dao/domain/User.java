@@ -1,6 +1,7 @@
 package com.profitgenie.profitgenie.dao.domain;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Table(name = "PG_user")
@@ -15,6 +16,20 @@ public class User extends AbstractEntity {
 
     @Column
     private Boolean support;
+
+    @Column
+    private Boolean member;
+
+
+
+
+    public Boolean getMember() {
+        return member;
+    }
+
+    public void setMember(Boolean member) {
+        this.member = member;
+    }
 
     public User(){}
 
@@ -41,4 +56,6 @@ public class User extends AbstractEntity {
     public void setSupport(Boolean support) {
         this.support = support;
     }
+
+
 }

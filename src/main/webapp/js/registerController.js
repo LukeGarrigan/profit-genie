@@ -47,7 +47,7 @@ app.controller("registerController", function ($scope, $http, $window) {
         }).then(function mySuccess(response) {
             $scope.$parent.userId = response.data.id;
             $scope.isAuthorised = true;
-            $window.location.href = '/members-page.html';
+            $window.location.href = '/user-page.html';
         }, function myFailure(response) {
             $scope.registerErrorMessage = response.data.message;
         });
@@ -64,7 +64,7 @@ app.controller("registerController", function ($scope, $http, $window) {
             'Content-Type': 'application/json'
           }
         }).then(function mySuccess(response){
-          $window.location.href = '/members-page.html';
+          $window.location.href = '/user-page.html';
         }, function errorCallback(response) {
           $scope.loginErrorMessage = response.data.message;
         });
@@ -80,7 +80,7 @@ app.controller("registerController", function ($scope, $http, $window) {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             data: 'username='+$scope.email+'&password='+$scope.password
         }).then(function mySuccess(response) {
-          $window.location.href = '/members-page.html';
+          $window.location.href = '/user-page.html';
         }, function errorCallback(response) {
           $scope.loginErrorMessage = "The credentials entered are incorrect";
         });

@@ -79,13 +79,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-2">
-                        <div id="colorlib-logo"><a href="index.html">Unapp</a></div>
+                        <div id="colorlib-logo"><a href="index.html">Profit Genie</a></div>
                     </div>
                     <div class="col-md-10 text-right menu-1">
                         <ul>
                             <li><a href="index.html">Home</a></li>
                             <li class="has-dropdown active">
-                                <a href="members-page.html">Members Page</a>
+                                <a href="user-page.html">User Page</a>
                             </li>
 
                         </ul>
@@ -104,14 +104,9 @@
                 <div class="container">
                     <div class="col-md-12 col-md-offset-0">
                         <div class="animate-box">
-                            <h2>Members Page</h2>
-                            <p class="breadcrumbs"><span><a href="index.html">Home</a></span> <span>Members Page</span>
+                            <h2>User Page</h2>
+                            <p class="breadcrumbs"><span><a href="index.html">Home</a></span> <span>User Page</span>
                             </p>
-
-
-                            <input type="text" ng-model="searchCriteria" class="form-control search-bar"
-                                   placeholder="Search">
-
 
                         </div>
                     </div>
@@ -126,79 +121,62 @@
 
     <!--class="colorlib-work"-->
 
-    <script async src="//tinder.thrivecart.com/embed/v1/thrivecart.js"></script><a data-thrivecart-account="fortunefilly" data-thrivecart-product="6" class="thrivecart-button thrivecart-button-styled thrivecart-button-green ">Buy now!</a>
 
-    <div ng-controller="membersPageController" ng-init="getAllMatchedBets()">
+
+    <div class="colorlib-pricing">
         <div class="container">
             <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center colorlib-heading animate-box">
+                    <h2>Membership Pricing</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 text-center animate-box">
+                    <div class="pricing">
+                        <h2 class="pricing-heading">Monthly</h2>
+                        <div class="price"><sup class="currency">£</sup>7.99<small>per month</small></div>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                        <!--<p><a href="#" class="btn btn-primary">Select Plan</a></p>-->
 
-                <div ui-sortable="sortableOptions" ng-model="matchedBets">
-                    <div class="col-md-12 bland-white" ng-repeat="bet in matchedBets | filter: searchCriteria">
-
-                        <div class="work-flex">
-
-
-                            <div class="row no-gutters">
-                                <div class="col-md-12 no-gutters ">
-                                    <div class="display-t desc">
-                                        <div class="display-tc">
-                                            <h2><a href="#">{{bet.title}}</a></h2>
-                                            <p>{{bet.description}}</p>
-                                            <a ng-href="{{bet.affiliateLink}}">{{bet.linkLabel}}</a>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
+                        <script async src="//tinder.thrivecart.com/embed/v1/thrivecart.js">
+                        </script>
+                        <a data-thrivecart-account="fortunefilly" data-thrivecart-product="6" class="btn btn-primary thrivecart-button thrivecart-button-styled thrivecart-button-green ">
+                            Buy now!
+                        </a>
 
 
-                            <div class="cross">
-                                <img src="images/cancel-512.png" ng-click="deleteMatchedBet(bet.id)"/>
-                            </div>
-
-                        </div>
                     </div>
                 </div>
-
-
-                <!--<div class="col-md-12">-->
-                <!--<div class="work-flex">-->
-                <!--<div class="half animate-box">-->
-                <!--<div class="row no-gutters">-->
-                <!--<div class="col-md-12 no-gutters">-->
-                <!--<a href="#" class="work-img" style="background-image: url(images/work-2.jpg);"></a>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--<div class="half animate-box">-->
-                <!--<div class="row no-gutters">-->
-                <!--<div class="col-md-12 no-gutters">-->
-                <!--<div class="display-t desc">-->
-                <!--<div class="display-tc">-->
-                <!--<h2><a href="#">A beige chair at a small white desk</a></h2>-->
-                <!--<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <ul class="pagination">
-                            <li class="disabled"><a href="#">&laquo;</a></li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">&raquo;</a></li>
-                        </ul>
+                <div class="col-md-3 text-center animate-box">
+                    <div class="pricing">
+                        <h2 class="pricing-heading">3 Monthly</h2>
+                        <div class="price"><sup class="currency">£</sup>15.99<small>per 3 months</small></div>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                        <p><a href="#" class="btn btn-primary">Select Plan</a></p>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center animate-box">
+                    <div class="pricing">
+                        <h2 class="pricing-heading">6 Monthly</h2>
+                        <div class="price"><sup class="currency">£</sup>34.99<small>per 6 months</small></div>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                        <p><a href="#" class="btn btn-primary">Select Plan</a></p>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center animate-box">
+                    <div class="pricing">
+                        <h2 class="pricing-heading">Unlimited</h2>
+                        <div class="price"><sup class="currency">£</sup>140<small>Once</small></div>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                        <p><a href="#" class="btn btn-primary">Select Plan</a></p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
+
+    <div ng-controller="membersPageController" ng-init="getAllMatchedBets()">
 
         <!-- ************************************************ END MEMBERS PAGE **************************************** -->
 
@@ -206,7 +184,7 @@
             <div class="container">
                 <div class="row row-pb-md">
                     <div class="col-md-3 colorlib-widget">
-                        <h4>About unapp</h4>
+                        <h4>About Profit Genie</h4>
                         <p>Far from the countries Vokalia and Consonantia, there live the blind texts. Separated
                             they
                             live in Bookmarksgrove right at the coast of the Semantics</p>

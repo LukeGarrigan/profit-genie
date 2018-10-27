@@ -42,8 +42,8 @@ public class MainSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable();
 
         http
-                .authorizeRequests()
-                .antMatchers("/", "/login/**", "/index.html", "/login.html", "/components/**", "/css/**", "/js/**", "/fonts/**", "/images/**", "/.sass-cache/**", "/services.html" ,"/user/changePassword**").permitAll();
+                .authorizeRequests()                                                                                                                                                                                     //todo remove user/**
+                .antMatchers("/", "/login/**", "/index.html", "/login.html", "/components/**", "/css/**", "/js/**", "/fonts/**", "/images/**", "/.sass-cache/**", "/services.html" ,"/user/changePassword**", "user/**").permitAll();
 
         http
                 .formLogin()
@@ -51,7 +51,7 @@ public class MainSecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginProcessingUrl("/api/authentication")
                     .usernameParameter("username")
                     .passwordParameter("password")
-                    .defaultSuccessUrl("/members-page.html")
+                    .defaultSuccessUrl("/user-page.html")
                     .failureForwardUrl("/login.html");
 
 
