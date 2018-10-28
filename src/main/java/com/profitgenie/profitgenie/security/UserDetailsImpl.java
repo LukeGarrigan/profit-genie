@@ -33,9 +33,12 @@ public class UserDetailsImpl implements UserDetails, Serializable {
 
         final List<GrantedAuthority> authorities = new LinkedList<>();
 
-        if(isEnabled()) {
-            if (this.user != null && this.user.getSupport()) {
+        if(isEnabled() && this.user != null) {
+            if (this.user.getSupport()) {
                 authorities.add(new SimpleGrantedAuthority("ROLE_SUPPORT"));
+                authorities.add(new SimpleGrantedAuthority("ROLE_MEMBER"));
+            } else if (this.user.getMember() != null && this.user.getMember()) {
+                authorities.add(new SimpleGrantedAuthority("ROLE_MEMBER"));
             }
         }
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));

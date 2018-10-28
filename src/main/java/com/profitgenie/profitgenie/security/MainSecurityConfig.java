@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 import javax.annotation.Resource;
@@ -35,6 +36,12 @@ public class MainSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+
+    @Bean
+    public AuthenticationSuccessHandler loginHandler() {
+        return new SuccessfulLoginHandler();
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -51,14 +58,14 @@ public class MainSecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginProcessingUrl("/api/authentication")
                     .usernameParameter("username")
                     .passwordParameter("password")
-                    .defaultSuccessUrl("/user-page.html")
+                    .successHandler(loginHandler())
                     .failureForwardUrl("/login.html");
 
 
         http
                 .authorizeRequests()
                 .antMatchers("/admin-page.html")
-                .hasRole("SUPPORT");
+                .hasRole(SecurityConstants.SUPPORT);
 
         http
                 .authorizeRequests()

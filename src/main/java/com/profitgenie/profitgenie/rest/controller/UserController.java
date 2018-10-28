@@ -128,11 +128,9 @@ public class UserController {
 
 
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)
-    public void welcomeMember(@RequestParam Map<String, String> data) {
-
-
-
+    public void welcomeMember(HttpServletRequest request, HttpServletResponse response,@RequestParam Map<String, String> data) throws IOException {
         membershipService.processNewMembership(data);
+        response.sendRedirect("/members-page.html");
     }
 
 

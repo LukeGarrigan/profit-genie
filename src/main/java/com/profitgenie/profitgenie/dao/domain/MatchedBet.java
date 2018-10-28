@@ -3,8 +3,10 @@ package com.profitgenie.profitgenie.dao.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
-@Entity(name = "PG_matched_bet")
+@Table(name = "PG_matched_bet")
+@Entity
 public class MatchedBet extends AbstractEntity {
 
 

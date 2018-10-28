@@ -3,8 +3,10 @@ package com.profitgenie.profitgenie.dao.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
-@Entity(name = "PG_order")
+@Table(name = "PG_order")
+@Entity
 public class Order extends AbstractEntity {
 
     @Column(name = "account_id")
