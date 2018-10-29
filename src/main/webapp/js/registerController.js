@@ -80,7 +80,14 @@ app.controller("registerController", function ($scope, $http, $window) {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             data: 'username='+$scope.email+'&password='+$scope.password
         }).then(function mySuccess(response) {
-          $window.location.href = '/user-page.html';
+          if (response.data.match(/<h2>(.*?)<\/h2>/g)[0] === "<h2>Members Page</h2>") {
+            $window.location.href = '/members-page.html';
+          } else if (response.data.match(/<h2>(.*?)<\/h2>/g)[0] === "<h2>Admin Page</h2>"){
+            $window.location.href = '/admin-page.html';
+          }{
+            $window.location.href = '/user-page.html';
+
+          }
         }, function errorCallback(response) {
           $scope.loginErrorMessage = "The credentials entered are incorrect";
         });

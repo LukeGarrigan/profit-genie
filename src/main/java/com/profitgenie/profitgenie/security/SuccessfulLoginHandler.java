@@ -27,7 +27,9 @@ public class SuccessfulLoginHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         String url = getTargetUrl(authentication);
+        log.debug("Redirecting user to {}", url);
         redirect.sendRedirect(request, response, url);
+
         clearAuthenticationAttributes(request);
     }
 
