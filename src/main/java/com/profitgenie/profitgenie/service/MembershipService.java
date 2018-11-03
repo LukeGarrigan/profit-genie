@@ -6,4 +6,6 @@ import java.util.Map;
 
 public interface MembershipService {
     void processNewMembership(Map<String, String> data);
+
+    void disableMembership(String email);
 }

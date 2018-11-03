@@ -47,12 +47,9 @@ public class UserDetailsServiceImpl implements UserDetailsService, PasswordSecur
         if (password.length() < 8) {
             throw new PasswordTooShortException();
         }
-
         if(!containsLetters(password) || !containNumbers(password)) {
             throw new PasswordMustContainLettersAndNumbers();
         }
-
-
     }
 
 

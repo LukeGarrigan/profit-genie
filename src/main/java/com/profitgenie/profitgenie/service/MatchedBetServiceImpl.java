@@ -3,14 +3,20 @@ package com.profitgenie.profitgenie.service;
 import com.profitgenie.profitgenie.dao.domain.MatchedBet;
 import com.profitgenie.profitgenie.dao.repository.MatchedBetDao;
 import com.profitgenie.profitgenie.exceptions.InvalidURLException;
+import com.profitgenie.profitgenie.exceptions.MustBeSupportToDeleteMatchedBet;
 import com.profitgenie.profitgenie.rest.controller.dto.MatchedBetDto;
+import com.profitgenie.profitgenie.security.SecurityConstants;
+import com.profitgenie.profitgenie.security.UserDetailsImpl;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -49,7 +55,7 @@ public class MatchedBetServiceImpl implements MatchedBetService, DtoDomainConver
     private void checkValidURL(String affiliateLink) {
         try {
             new URL(affiliateLink);
-        } catch(MalformedURLException malformedURLException) {
+        } catch (MalformedURLException malformedURLException) {
             throw new InvalidURLException(affiliateLink);
         }
     }
@@ -83,7 +89,22 @@ public class MatchedBetServiceImpl implements MatchedBetService, DtoDomainConver
 
     @Override
     public void deleteMatchedBet(long id) {
-        matchedBetDao.deleteById(id);
+        Collection<? extends GrantedAuthority> authorities = ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getAuthorities();
+        if (!isASupport(authorities)) {
+            throw new MustBeSupportToDeleteMatchedBet(id);
+        } else {
+            matchedBetDao.deleteById(id);
+        }
+    }
+
+    private boolean isASupport(Collection<? extends GrantedAuthority> authorities) {
+        boolean hasPermissions = false;
+        for (GrantedAuthority authority : authorities) {
+            if (authority.getAuthority().equals("ROLE_" + SecurityConstants.SUPPORT)) {
+                hasPermissions = true;
+            }
+        }
+        return hasPermissions;
     }
 
     private long getMatchedBetSequence(List<MatchedBetDto> matchedBetDtos, long id) {

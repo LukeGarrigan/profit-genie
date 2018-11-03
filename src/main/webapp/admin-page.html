@@ -126,7 +126,13 @@
 
     <!--class="colorlib-work"-->
 
-    <div ng-controller="membersPageController" ng-init="getAllMatchedBets()">
+    <div ng-controller="membersPageController" ng-init="getMatchedBetsAndUsers()">
+        <tr ng-repeat="name in allUsers.names">
+            <td>{{name}}</td>
+        </tr>
+
+
+
         <div class="container">
             <div class="row">
 

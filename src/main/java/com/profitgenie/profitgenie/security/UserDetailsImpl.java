@@ -19,6 +19,7 @@ public class UserDetailsImpl implements UserDetails, Serializable {
     private User user;
     private String sessionId;
 
+    private static final String ROLE  = "ROLE_";
 
     public UserDetailsImpl(User user, String sessionId) {
         Assert.notNull(user, "User must not be null");
@@ -35,13 +36,13 @@ public class UserDetailsImpl implements UserDetails, Serializable {
 
         if(isEnabled() && this.user != null) {
             if (this.user.getSupport()) {
-                authorities.add(new SimpleGrantedAuthority("ROLE_SUPPORT"));
-                authorities.add(new SimpleGrantedAuthority("ROLE_MEMBER"));
+                authorities.add(new SimpleGrantedAuthority(ROLE+SecurityConstants.SUPPORT));
+                authorities.add(new SimpleGrantedAuthority(ROLE+SecurityConstants.MEMBER));
             } else if (this.user.getMember() != null && this.user.getMember()) {
-                authorities.add(new SimpleGrantedAuthority("ROLE_MEMBER"));
+                authorities.add(new SimpleGrantedAuthority(ROLE+SecurityConstants.MEMBER));
             }
         }
-        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        authorities.add(new SimpleGrantedAuthority(ROLE+SecurityConstants.USER));
 
         return authorities;
     }

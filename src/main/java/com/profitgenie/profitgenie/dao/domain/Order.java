@@ -1,9 +1,6 @@
 package com.profitgenie.profitgenie.dao.domain;
 
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Table(name = "PG_order")
 @Entity
@@ -28,6 +25,16 @@ public class Order extends AbstractEntity {
     @Column(name = "order_id")
     private long orderId;
 
+    @ManyToOne
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public long getAccountId() {
         return accountId;

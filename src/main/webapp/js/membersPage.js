@@ -13,6 +13,8 @@ membersPage.controller("membersPageController", function ($scope, $http) {
   $scope.imageSrc ="";
   $scope.linkLabel;
 
+  $scope.allUsers = "";
+
 
 
   $scope.image = {};
@@ -42,6 +44,11 @@ membersPage.controller("membersPageController", function ($scope, $http) {
 
   };
 
+  $scope.getMatchedBetsAndUsers = function() {
+    $scope.getAllMatchedBets();
+    $scope.getAllUsers();
+  };
+
   $scope.getAllMatchedBets = function () {
     $http.get("matched/get")
       .then(function (response) {
@@ -49,6 +56,23 @@ membersPage.controller("membersPageController", function ($scope, $http) {
         $scope.matchedBets = response.data;
       });
   };
+
+  $scope.getAllUsers = function () {
+    $http.get("admin/get-users")
+      .then(function (response) {
+        var names = response.data;
+        console.log(names);
+        for (var i = 0; i < names.length; i++) {
+
+          console.log(names[i]);
+        }
+      });
+  };
+
+
+
+
+
 
   $scope.submitMatchedBet = function () {
     var form = document.getElementById("create-matched-bet");
@@ -92,6 +116,7 @@ membersPage.controller("membersPageController", function ($scope, $http) {
       });
     }
   };
+
 
 
 });

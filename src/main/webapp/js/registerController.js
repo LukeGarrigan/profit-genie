@@ -84,7 +84,7 @@ app.controller("registerController", function ($scope, $http, $window) {
             $window.location.href = '/members-page.html';
           } else if (response.data.match(/<h2>(.*?)<\/h2>/g)[0] === "<h2>Admin Page</h2>"){
             $window.location.href = '/admin-page.html';
-          }{
+          } else {
             $window.location.href = '/user-page.html';
 
           }
@@ -93,6 +93,7 @@ app.controller("registerController", function ($scope, $http, $window) {
         });
 
     };
+
 
 
 });

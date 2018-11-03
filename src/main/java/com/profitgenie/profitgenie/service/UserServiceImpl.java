@@ -6,15 +6,19 @@ import com.profitgenie.profitgenie.dao.domain.User;
 import com.profitgenie.profitgenie.dao.repository.PasswordResetDao;
 import com.profitgenie.profitgenie.dao.repository.UserDao;
 import com.profitgenie.profitgenie.exceptions.EmailAlreadyRegistered;
+import com.profitgenie.profitgenie.exceptions.MustBeSupportUser;
 import com.profitgenie.profitgenie.exceptions.PasswordTooShortException;
 import com.profitgenie.profitgenie.rest.controller.dto.UserDto;
+import com.profitgenie.profitgenie.rest.controller.dto.UsersListDto;
+import com.profitgenie.profitgenie.security.SecurityConstants;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService, DtoDomainConversion<UserDto, User> {
@@ -37,7 +41,7 @@ public class UserServiceImpl implements UserService, DtoDomainConversion<UserDto
     public UserDto createUser(UserDto userDto) {
 
         User user = new User();
-        user.setEmail(userDto.getEmail());
+        user.setEmail(userDto.getEmail().toLowerCase());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setSupport(false);
 
@@ -94,10 +98,32 @@ public class UserServiceImpl implements UserService, DtoDomainConversion<UserDto
         userDao.save(user);
     }
 
-
-
     @Override
     public UserDto toDto(User domain) {
         return modelMapper.map(domain, UserDto.class);
+    }
+
+    @Override
+    public UsersListDto getUsers() {
+
+        if (!isCurrentUserSupport()) {
+            throw new MustBeSupportUser();
+        }
+
+        Map<String, Boolean> users = userDao.getUsers();
+        UsersListDto usersListDto = new UsersListDto();
+        usersListDto.setNames(users);
+        return usersListDto;
+
+    }
+
+    private boolean isCurrentUserSupport() {
+        for (GrantedAuthority grantedAuthority : SecurityContextHolder.getContext().getAuthentication().getAuthorities()) {
+
+            if (grantedAuthority.getAuthority() == SecurityConstants.ROLE + SecurityConstants.SUPPORT) {
+                return true;
+            }
+        }
+        return false;
     }
 }

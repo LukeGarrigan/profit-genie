@@ -67,6 +67,12 @@ public class MainSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin-page.html")
                 .hasRole(SecurityConstants.SUPPORT);
 
+
+        http
+                .authorizeRequests()
+                .antMatchers("/members-page.html")
+                .hasRole(SecurityConstants.MEMBER);
+
         http
                 .authorizeRequests()
                 .antMatchers("/user/changePassword*", "update-password*")
