@@ -5,4 +5,4 @@ A website and subscription service for matched betting.
 - [x] Hooking up thrive cart
 - [x] Enable membership roles 
 - [ ] Disable membership roles
--- [ ] Write some integration tests
+- [ ] Write some integration tests
