@@ -12,8 +12,8 @@ membersPage.controller("membersPageController", function ($scope, $http) {
   $scope.errorMessage = "";
   $scope.imageSrc ="";
   $scope.linkLabel;
-
-  $scope.allUsers = "";
+  //
+  // $scope.allUsers = [];
 
 
 
@@ -57,17 +57,6 @@ membersPage.controller("membersPageController", function ($scope, $http) {
       });
   };
 
-  $scope.getAllUsers = function () {
-    $http.get("admin/get-users")
-      .then(function (response) {
-        var names = response.data;
-        console.log(names);
-        for (var i = 0; i < names.length; i++) {
-
-          console.log(names[i]);
-        }
-      });
-  };
 
 
 
@@ -100,7 +89,7 @@ membersPage.controller("membersPageController", function ($scope, $http) {
       $scope.errorMessage = response.data.message;
     });
 
-  }
+  };
 
 
   $scope.sortableOptions = {
@@ -116,6 +105,41 @@ membersPage.controller("membersPageController", function ($scope, $http) {
       });
     }
   };
+
+
+  $scope.getAllUsers = function () {
+    $http.get("admin/get-users")
+      .then(function (response) {
+        $scope.allUsers = [];
+        angular.forEach(response.data.names, function(value, key){
+          var user = {};
+          user.email = key;
+          user.isMember = value;
+          $scope.allUsers.push(user);
+        });
+      });
+  };
+
+
+  $scope.changeMembershipStatus = function(key) {
+    $http.post("admin/toggle", key, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then(function response(response) {
+      $scope.allUsers = [];
+
+        angular.forEach(response.data.names, function(value, key){
+          var user = {};
+          user.email = key;
+          user.isMember = value;
+          $scope.allUsers.push(user);
+        });
+    });
+
+
+  }
 
 
 

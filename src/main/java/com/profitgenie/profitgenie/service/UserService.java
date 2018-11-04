@@ -20,6 +20,8 @@ public interface UserService {
     void changeUserPassword(User user, String password);
 
     UsersListDto getUsers();
+
+    void changeMembershipStatus(String email);
 }
 
 

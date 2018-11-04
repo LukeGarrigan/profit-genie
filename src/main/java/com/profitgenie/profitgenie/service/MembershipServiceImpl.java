@@ -41,7 +41,6 @@ public class MembershipServiceImpl implements MembershipService {
     @Override
     public void processNewMembership(Map<String, String> data) {
         log.debug("Processing membership");
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = ((UserDetailsImpl) authentication.getPrincipal()).getUsername();
         String customerEmail = data.get("thrivecart[customer][email]");

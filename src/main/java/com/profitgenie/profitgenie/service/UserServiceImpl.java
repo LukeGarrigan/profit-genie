@@ -126,4 +126,22 @@ public class UserServiceImpl implements UserService, DtoDomainConversion<UserDto
         }
         return false;
     }
+
+
+    @Override
+    public void changeMembershipStatus(String email) {
+        User user = findUsersByEmail(email);
+
+
+        boolean isMember;
+        if (user.getMember() != null) {
+            isMember = !user.getMember();
+        } else {
+            isMember = true;
+        }
+
+        user.setMember(isMember);
+        userDao.save(user);
+
+    }
 }

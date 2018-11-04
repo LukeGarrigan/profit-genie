@@ -64,7 +64,7 @@ public class MainSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers("/admin-page.html")
+                .antMatchers("/admin-page.html", "/users-list-page.html")
                 .hasRole(SecurityConstants.SUPPORT);
 
 
