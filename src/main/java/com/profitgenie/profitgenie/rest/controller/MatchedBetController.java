@@ -16,25 +16,25 @@ public class MatchedBetController {
     @Resource
     private MatchedBetService matchedBetService;
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @PostMapping(value = "/create")
     public MatchedBetDto createMatchedBet(@RequestBody MatchedBetDto matchedBetDto) {
         return matchedBetService.createMatchedBet(matchedBetDto);
     }
 
 
-    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    @GetMapping(value = "/get")
     public List<MatchedBetDto> getMatchedBets() {
         return matchedBetService.getMatchedBets();
     }
 
 
-    @RequestMapping(value = "/updateMatchedBets", method = RequestMethod.POST)
+    @PostMapping(value = "/updateMatchedBets")
     public List<MatchedBetDto> updateMatchedBets(@RequestBody List<MatchedBetDto> matchedBetDtos) {
         return matchedBetService.updateMatchedBets(matchedBetDtos);
     }
 
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/delete/{id}")
     public void deleteMatchedBet(@PathVariable String id) {
         matchedBetService.deleteMatchedBet(Long.parseLong(id));
     }

@@ -74,7 +74,7 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
+    @PostMapping(value = "/resetPassword")
     @ResponseBody
     public void resetPassword(HttpServletRequest request, @RequestBody String userEmail) {
         User user = userService.findUsersByEmail(userEmail);
@@ -101,7 +101,7 @@ public class UserController {
         return email;
     }
 
-    @RequestMapping(value = "/changePassword", method = RequestMethod.GET)
+    @GetMapping(value = "/changePassword")
     public void showChangePasswordPage(HttpServletRequest request, HttpServletResponse response, Locale locale, @RequestParam("id") long id, @RequestParam("token") String token) throws IOException {
         String result = securityService.validatePasswordResetToken(id, token);
         if (result == null) {
@@ -112,8 +112,7 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "/savePassword", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/savePassword")
     public void savePassword(HttpServletRequest request, Locale locale, @RequestBody String password) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -126,13 +125,11 @@ public class UserController {
 
     }
 
-
-    @RequestMapping(value = "/welcome", method = RequestMethod.GET)
+    @GetMapping(value = "/welcome")
     public void welcomeMember(HttpServletRequest request, HttpServletResponse response,@RequestParam Map<String, String> data) throws IOException {
         membershipService.processNewMembership(data);
         response.sendRedirect("/members-page.html");
     }
-
 
 }
 
