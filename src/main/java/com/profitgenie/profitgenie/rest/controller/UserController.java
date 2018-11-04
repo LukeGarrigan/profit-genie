@@ -49,7 +49,7 @@ public class UserController {
     private MembershipService membershipService;
 
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @PostMapping(value = "/create")
     public UserDto createUser(@RequestBody UserDto userDto, HttpServletRequest request, HttpServletResponse response) {
         passwordSecurityService.checkPasswordComplexEnough(userDto.getPassword());
 

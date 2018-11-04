@@ -7,7 +7,7 @@ import com.profitgenie.profitgenie.dao.repository.PasswordResetDao;
 import com.profitgenie.profitgenie.dao.repository.UserDao;
 import com.profitgenie.profitgenie.exceptions.EmailAlreadyRegistered;
 import com.profitgenie.profitgenie.exceptions.MustBeSupportUser;
-import com.profitgenie.profitgenie.exceptions.PasswordTooShortException;
+import com.profitgenie.profitgenie.exceptions.UserNotFoundException;
 import com.profitgenie.profitgenie.rest.controller.dto.UserDto;
 import com.profitgenie.profitgenie.rest.controller.dto.UsersListDto;
 import com.profitgenie.profitgenie.security.SecurityConstants;
@@ -18,7 +18,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Calendar;
+import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService, DtoDomainConversion<UserDto, User> {
@@ -85,7 +86,7 @@ public class UserServiceImpl implements UserService, DtoDomainConversion<UserDto
         resetToken.setUser(user);
         resetToken.setToken(token);
 
-        Calendar calendar =  Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
         calendar.setTime(calendar.getTime());
         calendar.add(Calendar.HOUR, 24);
         resetToken.setExpiryDate(calendar.getTime());
@@ -110,11 +111,16 @@ public class UserServiceImpl implements UserService, DtoDomainConversion<UserDto
             throw new MustBeSupportUser();
         }
 
+        UsersListDto usersListDto = getExistingUsers();
+        return usersListDto;
+
+    }
+
+    public UsersListDto getExistingUsers() {
         Map<String, Boolean> users = userDao.getUsers();
         UsersListDto usersListDto = new UsersListDto();
         usersListDto.setNames(users);
         return usersListDto;
-
     }
 
     private boolean isCurrentUserSupport() {
@@ -142,6 +148,5 @@ public class UserServiceImpl implements UserService, DtoDomainConversion<UserDto
 
         user.setMember(isMember);
         userDao.save(user);
-
     }
 }

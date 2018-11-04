@@ -21,6 +21,8 @@ public interface UserService {
 
     UsersListDto getUsers();
 
+    UsersListDto getExistingUsers();
+
     void changeMembershipStatus(String email);
 }
 

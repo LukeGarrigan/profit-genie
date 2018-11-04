@@ -2,8 +2,11 @@ package com.profitgenie.profitgenie.service;
 
 import com.profitgenie.profitgenie.dao.domain.MatchedBet;
 import com.profitgenie.profitgenie.dao.domain.User;
+import com.profitgenie.profitgenie.dao.repository.PasswordResetDao;
 import com.profitgenie.profitgenie.dao.repository.UserDao;
 import com.profitgenie.profitgenie.rest.controller.dto.UserDto;
+import com.profitgenie.profitgenie.rest.controller.dto.UsersListDto;
+import com.profitgenie.profitgenie.security.UserHasBecomeMember;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -12,12 +15,16 @@ import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
@@ -36,6 +43,9 @@ public class UserServiceImplTest {
 
     @MockBean
     private PasswordEncoder passwordEncoder;
+
+    @MockBean
+    private PasswordResetDao passwordResetDao;
 
 
     @TestConfiguration
@@ -58,20 +68,119 @@ public class UserServiceImplTest {
         // when
         boolean userSupport = userService.isUserSupport(-1);
         // then
-        assertEquals(true, userSupport);
+        assertEquals(null, userSupport);
     }
+
+
+
+    @Test
+    public void testIsMember() {
+        // given
+        User user = new User();
+        user.setId(-1);
+        user.setEmail("imamember@gmail.com");
+        user.setMember(true);
+        Mockito.when(userDao.getOne(-1L)).thenReturn(user);
+
+        // when
+        User returnedUser = userService.getUser(-1);
+
+        // then
+        assertEquals(true, returnedUser.getMember());
+    }
+
+
+    @Test
+    public void testSuccessfullyChangeMembershipStatus() {
+        // given
+        User user = new User();
+        user.setEmail("iwasamember@gmail.com");
+        user.setSupport(false);
+        user.setMember(true);
+        Mockito.when(userDao.findUserByEmail("iwasamember@gmail.com")).thenReturn(user);
+
+        // when
+        userService.changeMembershipStatus(user.getEmail());
+
+        // then
+        assertEquals(false, user.getMember());
+    }
+
+
+    @Test
+    public void testSuccessfullyChangeMembershipStatusToNotMember() {
+        // given
+        User user = new User();
+        user.setEmail("iwasntamember@gmail.com");
+        user.setSupport(false);
+        user.setMember(false);
+        Mockito.when(userDao.findUserByEmail("iwasntamember@gmail.com")).thenReturn(user);
+
+        // when
+        userService.changeMembershipStatus(user.getEmail());
+
+        // then
+        assertEquals(true, user.getMember());
+    }
+
+
+    @Test
+    public void testSuccessfullyChangeUsersPassword() {
+        // given
+
+        String newPassword = "mynewpassword";
+        User user = new User();
+        user.setEmail("changingmypassword@gmail.com");
+        user.setSupport(false);
+        user.setMember(false);
+        user.setPassword("somedodgyhashing");
+        Mockito.when(passwordEncoder.encode(newPassword )).thenReturn("realgoodhashing");
+        // when
+        userService.changeUserPassword(user, newPassword);
+
+        // then
+        assertEquals("realgoodhashing", user.getPassword());
+    }
+
 
 
 
     @Test
     public void testNotSupportUser() {
         // given
-        Mockito.when(userDao.getOne(-1L)).thenReturn(null);
+        User user = new User();
+        user.setSupport(false);
+        user.setEmail("blar@blar.com");
+        user.setId(-1);
+
+        Mockito.when(userDao.getOne(-1L)).thenReturn(user);
         // when
         boolean userSupport = userService.isUserSupport(-1);
         // then
         assertEquals(false, userSupport);
     }
+
+
+    @Test
+    public void testSuccessfullyGetUsers() {
+        // given
+        User user = new User();
+        user.setMember(true);
+        user.setEmail("imamember@gmail.com");
+
+        Map<String, Boolean> users = new HashMap<>();
+        users.put("codeheir@gmail.com", true);
+        users.put("pockets@gmail.com", true);
+        users.put("orangegames@gmail.com", false);
+        Mockito.when(userDao.getUsers()).thenReturn(users);
+        // when
+        UsersListDto returnedUsers = userService.getExistingUsers();
+
+        // then
+        assertEquals(3, returnedUsers.getNames().size());
+    }
+
+
 
 
 
@@ -91,5 +200,6 @@ public class UserServiceImplTest {
         assertEquals(userDto.getEmail(), userReturned.getEmail());
 
     }
+
 
 }
