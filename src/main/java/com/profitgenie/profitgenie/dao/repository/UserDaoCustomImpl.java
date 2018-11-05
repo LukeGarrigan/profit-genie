@@ -28,7 +28,7 @@ public class UserDaoCustomImpl implements UserDaoCustom {
 
     @Override
     public Map<String, Boolean> getUsers() {
-        Query getUsersQuery = entityManager.createQuery("select e.email, e.member from User e");
+        Query getUsersQuery = entityManager.createQuery("select aUser.email, anOrder.paymentEmail, aUser.member from User aUser left join Order anOrder on anOrder.user.id = aUser.id");
         try{
             List<Object[]> resultList = (List<Object[]>)getUsersQuery.getResultList();
             return buildUsersMap(resultList);
@@ -40,7 +40,17 @@ public class UserDaoCustomImpl implements UserDaoCustom {
     private Map<String, Boolean> buildUsersMap(List<Object[]> resultList) {
         Map<String, Boolean> users = new HashMap<>();
         for (Object[] objects : resultList) {
-            users.put((String)objects[0], objects[1] == null ? false : (Boolean)objects[1]);
+            String userEmail = (String)objects[0];
+            String orderEmail = (String)objects[1];
+
+            StringBuilder emailCombined = new StringBuilder();
+            emailCombined.append(userEmail);
+            if (orderEmail != null) {
+                emailCombined.append(" ("+orderEmail+ ") ");
+            }
+
+            boolean isAMember = objects[2] == null ? false : (Boolean)objects[2];
+            users.put(emailCombined.toString(), isAMember);
         }
         return users;
     }

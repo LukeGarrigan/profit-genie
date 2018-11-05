@@ -55,6 +55,7 @@ public class UserController {
 
         UserDto user = userService.createUser(userDto);
         authenticateUserAndSetSession(userDto, request);
+
         return user;
     }
 

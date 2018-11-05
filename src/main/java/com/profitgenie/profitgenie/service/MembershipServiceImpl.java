@@ -53,7 +53,7 @@ public class MembershipServiceImpl implements MembershipService {
         User user = getUserAndSetToMember(email);
         Order order = new Order();
         order.setAccountName(accountName);
-        order.setPaymentEmail(user.getEmail());
+        order.setPaymentEmail(customerEmail);
         order.setOrderId(orderId);
         order.setAccountId(accountId);
         order.setPrice(orderTotal);
