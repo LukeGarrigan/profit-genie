@@ -12,8 +12,12 @@ membersPage.controller("membersPageController", function ($scope, $http) {
   $scope.errorMessage = "";
   $scope.imageSrc ="";
   $scope.linkLabel;
-  //
-  // $scope.allUsers = [];
+
+  // pagination
+  $scope.currentPage = 1;
+  $scope.numbPerPage = 10;
+  $scope.maxSize = 5;
+
 
 
 
@@ -24,9 +28,17 @@ membersPage.controller("membersPageController", function ($scope, $http) {
     $scope.image = $files[0];
 
 
-
   };
 
+  $scope.numPages = function () {
+    return Math.ceil($scope.allUsers.length/ $scope.numbPerPage);
+  };
+
+
+  $scope.$watch('currentPage + numPerPage', function() {
+    var begin = (($scope.currentPage - 1) * $scope.numbPerPage), end = begin + $scope.numbPerPage;
+    $scope.filteredUsers = $scope.allUsers.slice(begin, end);
+  });
 
   function getUrl(bet) {
     return bet.affiliateLink;
@@ -110,13 +122,7 @@ membersPage.controller("membersPageController", function ($scope, $http) {
   $scope.getAllUsers = function () {
     $http.get("admin/get-users")
       .then(function (response) {
-        $scope.allUsers = [];
-        angular.forEach(response.data.names, function(value, key){
-          var user = {};
-          user.email = key;
-          user.isMember = value;
-          $scope.allUsers.push(user);
-        });
+        $scope.allUsers = response.data.users;
       });
   };
 
@@ -128,14 +134,8 @@ membersPage.controller("membersPageController", function ($scope, $http) {
         'Content-Type': 'application/json'
       }
     }).then(function response(response) {
-      $scope.allUsers = [];
-
-        angular.forEach(response.data.names, function(value, key){
-          var user = {};
-          user.email = key;
-          user.isMember = value;
-          $scope.allUsers.push(user);
-        });
+      $scope.allUsers = response.data.users;
+      alert("You have changed " + key +" membership status!");
     });
 
 

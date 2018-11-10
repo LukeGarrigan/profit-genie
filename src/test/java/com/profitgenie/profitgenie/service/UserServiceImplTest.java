@@ -162,29 +162,6 @@ public class UserServiceImplTest {
 
 
     @Test
-    public void testSuccessfullyGetUsers() {
-        // given
-        User user = new User();
-        user.setMember(true);
-        user.setEmail("imamember@gmail.com");
-
-        Map<String, Boolean> users = new HashMap<>();
-        users.put("codeheir@gmail.com", true);
-        users.put("pockets@gmail.com", true);
-        users.put("orangegames@gmail.com", false);
-        Mockito.when(userDao.getUsers()).thenReturn(users);
-        // when
-        UsersListDto returnedUsers = userService.getExistingUsers();
-
-        // then
-        assertEquals(3, returnedUsers.getNames().size());
-    }
-
-
-
-
-
-    @Test
     public void testSuccessfullyCreateUser(){
         // given
         UserDto userDto = new UserDto();

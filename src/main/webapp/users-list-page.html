@@ -55,7 +55,7 @@
     <!-- Theme style  -->
     <link rel="stylesheet" href="css/style.css">
 
-    <link rel="stylesheet" href="css/user-list.css">
+
 
 
     <!-- Modernizr JS -->
@@ -63,7 +63,6 @@
     <!-- FOR IE9 below -->
     <!--[if lt IE 9]>
     <script src="js/respond.min.js"></script>
-
 
     <![endif]-->
 
@@ -133,18 +132,21 @@
     <!-- ************************************************ MEMBERS PAGE ************************ -->
 
 
-
-
     <div ng-controller="membersPageController" ng-init="getMatchedBetsAndUsers()">
 
-
         <div class="container">
-
-            <div class="row" ng-repeat="person in allUsers | filter:searchCriteria">
-                <p class="id-num">{{person.email}}</p>
-                <p class="name">{{person.isMember}}</p>
-                <div class="button" ng-click="changeMembershipStatus(person.email)">Toggle</div>
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action active">
+                    Users
+                </a>
+                <div ng-repeat="person in allUsers | filter:searchCriteria">
+                    <a href="#" class="list-group-item list-group-item-action" ng-click="changeMembershipStatus(person.email)">
+                        <b>Email:</b> {{person.email}}  <br>
+                        <b>Payment Email: </b>{{person.orderEmail}} <br>
+                        <b>Member</b> {{person.member}}</a>
+                </div>
             </div>
+
         </div>
 
 

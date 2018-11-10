@@ -1,8 +1,10 @@
 package com.profitgenie.profitgenie.dao.repository;
 
 import com.profitgenie.profitgenie.dao.domain.User;
+import com.profitgenie.profitgenie.rest.controller.dto.UserViewDto;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +29,7 @@ public class UserDaoCustomImpl implements UserDaoCustom {
 
 
     @Override
-    public Map<String, Boolean> getUsers() {
+    public List<UserViewDto> getUsers() {
         Query getUsersQuery = entityManager.createQuery("select aUser.email, anOrder.paymentEmail, aUser.member from User aUser left join Order anOrder on anOrder.user.id = aUser.id");
         try{
             List<Object[]> resultList = (List<Object[]>)getUsersQuery.getResultList();
@@ -37,20 +39,21 @@ public class UserDaoCustomImpl implements UserDaoCustom {
         }
     }
 
-    private Map<String, Boolean> buildUsersMap(List<Object[]> resultList) {
-        Map<String, Boolean> users = new HashMap<>();
+    private List<UserViewDto> buildUsersMap(List<Object[]> resultList) {
+        List<UserViewDto> users = new ArrayList<>();
         for (Object[] objects : resultList) {
+            UserViewDto userViewDto = new UserViewDto();
+
             String userEmail = (String)objects[0];
             String orderEmail = (String)objects[1];
-
-            StringBuilder emailCombined = new StringBuilder();
-            emailCombined.append(userEmail);
-            if (orderEmail != null) {
-                emailCombined.append(" ("+orderEmail+ ") ");
-            }
-
             boolean isAMember = objects[2] == null ? false : (Boolean)objects[2];
-            users.put(emailCombined.toString(), isAMember);
+
+            userViewDto.setEmail(userEmail);
+            userViewDto.setOrderEmail(orderEmail);
+            userViewDto.setMember(isAMember);
+
+            users.add(userViewDto);
+
         }
         return users;
     }

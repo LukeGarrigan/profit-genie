@@ -9,6 +9,7 @@ import com.profitgenie.profitgenie.exceptions.EmailAlreadyRegistered;
 import com.profitgenie.profitgenie.exceptions.MustBeSupportUser;
 import com.profitgenie.profitgenie.exceptions.UserNotFoundException;
 import com.profitgenie.profitgenie.rest.controller.dto.UserDto;
+import com.profitgenie.profitgenie.rest.controller.dto.UserViewDto;
 import com.profitgenie.profitgenie.rest.controller.dto.UsersListDto;
 import com.profitgenie.profitgenie.security.SecurityConstants;
 import org.modelmapper.ModelMapper;
@@ -19,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -117,9 +119,9 @@ public class UserServiceImpl implements UserService, DtoDomainConversion<UserDto
     }
 
     public UsersListDto getExistingUsers() {
-        Map<String, Boolean> users = userDao.getUsers();
+        List<UserViewDto> users = userDao.getUsers();
         UsersListDto usersListDto = new UsersListDto();
-        usersListDto.setNames(users);
+        usersListDto.setUsers(users);
         return usersListDto;
     }
 

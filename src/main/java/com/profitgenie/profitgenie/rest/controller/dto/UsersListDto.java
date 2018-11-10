@@ -1,19 +1,22 @@
 package com.profitgenie.profitgenie.rest.controller.dto;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class UsersListDto {
 
 
-    private Map<String, Boolean> names = new HashMap<>();
+    private List<UserViewDto> users = new ArrayList<>();
 
-    public Map<String, Boolean> getNames() {
-        return names;
+
+    public List<UserViewDto> getUsers() {
+        return users;
     }
 
-    public void setNames(Map<String, Boolean> names) {
-        this.names = names;
+    public void setUsers(List<UserViewDto> users) {
+        this.users = users;
     }
 }
 
