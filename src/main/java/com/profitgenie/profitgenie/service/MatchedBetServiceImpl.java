@@ -17,6 +17,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 
@@ -43,6 +44,7 @@ public class MatchedBetServiceImpl implements MatchedBetService, DtoDomainConver
         matchedBet.setTitle(matchedBetDto.getTitle());
         matchedBet.setSequence(matchedBetDto.getSequence());
         matchedBet.setLinkLabel(matchedBetDto.getLinkLabel());
+        matchedBet.setDate(new Date());
         incrementAllOtherSequences();
 
         matchedBetDao.save(matchedBet);

@@ -4,6 +4,7 @@ package com.profitgenie.profitgenie.dao.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Table(name = "PG_matched_bet")
 @Entity
@@ -22,6 +23,8 @@ public class MatchedBet extends AbstractEntity {
     private long sequence;
     @Column
     private String linkLabel;
+    @Column
+    private Date date;
 
 
     public String getDescription() {
@@ -70,5 +73,13 @@ public class MatchedBet extends AbstractEntity {
 
     public String getLinkLabel() {
         return linkLabel;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

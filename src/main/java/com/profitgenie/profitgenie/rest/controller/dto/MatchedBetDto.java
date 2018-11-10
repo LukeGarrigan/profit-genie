@@ -1,6 +1,7 @@
 package com.profitgenie.profitgenie.rest.controller.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class MatchedBetDto implements Serializable {
 
@@ -11,6 +12,7 @@ public class MatchedBetDto implements Serializable {
     private String linkLabel;
     private long sequence;
     private long id;
+    private Date date;
 
 
     public String getLinkLabel() {
@@ -67,5 +69,13 @@ public class MatchedBetDto implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

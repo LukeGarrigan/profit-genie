@@ -10,7 +10,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 
 <script src="js/membersPage.js"></script>
-
 <html>
 <head>
     <meta charset="utf-8">
@@ -130,7 +129,7 @@
             <div class="row">
 
                 <div ui-sortable="sortableOptions" ng-model="matchedBets">
-                    <div class="col-md-12 bland-white" ng-repeat="bet in matchedBets | filter: searchCriteria">
+                    <div class="col-md-12 bland-white admin" ng-repeat="bet in matchedBets | filter: searchCriteria">
 
                         <div class="work-flex">
 
@@ -138,19 +137,26 @@
                             <div class="row no-gutters">
                                 <div class="col-md-12 no-gutters ">
                                     <div class="display-t desc">
-                                        <div class="display-tc">
-                                            <h2><a href="#">{{bet.title}}</a></h2>
-                                            <p>{{bet.description}}</p>
-                                            <a ng-href="{{bet.affiliateLink}}">{{bet.linkLabel}}</a>
-                                        </div>
+                                        <h2><a href="#">{{bet.title}}</a></h2>
+
+
+
+
+
+                                        <p>{{bet.description}}</p>
+                                        <a ng-href="{{bet.affiliateLink}}">{{bet.linkLabel}}</a>
 
                                     </div>
                                 </div>
                             </div>
 
 
-                            <div class="cross">
-                                <img src="images/cancel-512.png" ng-click="deleteMatchedBet(bet.id)"/>
+
+
+
+
+                            <div class ="myDate">
+                                {{bet.date}}
                             </div>
 
                         </div>

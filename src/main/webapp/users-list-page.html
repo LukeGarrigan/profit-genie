@@ -7,11 +7,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
 
-<!-- Angular Material Library -->
-<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 
 <script src="js/membersPage.js"></script>
-
+<!-- Angular Material Library -->
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 <html>
 <head>
     <meta charset="utf-8">
@@ -56,8 +55,6 @@
     <link rel="stylesheet" href="css/style.css">
 
 
-
-
     <!-- Modernizr JS -->
     <script src="js/modernizr-2.6.2.min.js"></script>
     <!-- FOR IE9 below -->
@@ -86,6 +83,7 @@
                     <div class="col-md-2">
                         <div id="colorlib-logo"><a href="index.html">Unapp</a></div>
                     </div>
+
                     <div class="col-md-10 text-right menu-1">
                         <ul>
                             <li><a href="index.html">Home</a></li>
@@ -108,20 +106,20 @@
         <div class="display-t display-t2 text-center">
             <div class="display-tc display-tc2">
                 <div class="container">
-                    <div class="col-md-12 col-md-offset-0">
-                        <div class="animate-box">
-                            <h2>View Users Page</h2>
-                            <p class="breadcrumbs"><span><a href="admin-page.html">Admin Page</a></span> <span>View Users Page</span>
-                            </p>
+                    <!--<div class="col-md-12 col-md-offset-0">-->
+                    <div class="animate-box">
+                        <h2>View Users Page</h2>
+                        <p class="breadcrumbs"><span><a href="admin-page.html">Admin Page</a></span> <span>View Users Page</span>
+                        </p>
 
 
-                            <input type="text" ng-model="searchCriteria" class="form-control search-bar"
-                                   placeholder="Search">
+                        <input type="text" ng-model="searchCriteria" class="form-control search-bar"
+                               placeholder="Search">
 
 
-                        </div>
                     </div>
                 </div>
+                <!--</div>-->
             </div>
         </div>
 
@@ -134,17 +132,22 @@
 
     <div ng-controller="membersPageController" ng-init="getMatchedBetsAndUsers()">
 
-        <div class="container">
+        <div class="container users-grid">
             <div class="list-group">
                 <a href="#" class="list-group-item list-group-item-action active">
                     Users
                 </a>
+
+
                 <div ng-repeat="person in allUsers | filter:searchCriteria">
-                    <a href="#" class="list-group-item list-group-item-action" ng-click="changeMembershipStatus(person.email)">
-                        <b>Email:</b> {{person.email}}  <br>
-                        <b>Payment Email: </b>{{person.orderEmail}} <br>
+                    <a href="#" class="list-group-item list-group-item-action"
+                       ng-click="changeMembershipStatus(person.email)">
+                        <b>Email:</b> {{person.email}} <br>
+                        <b>Payment Email:</b> {{person.orderEmail}} <br>
                         <b>Member</b> {{person.member}}</a>
                 </div>
+
+
             </div>
 
         </div>

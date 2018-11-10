@@ -1,6 +1,6 @@
-var membersPage = angular.module('membersPage', ['ui.sortable', 'ngFileUpload']);
+var membersPage = angular.module('membersPage', ['ngMaterial', 'ui.sortable']);
 
-membersPage.controller("membersPageController", function ($scope, $http) {
+membersPage.controller("membersPageController", function ($scope, $http, $mdDialog, $filter) {
 
 
   $scope.description = "";
@@ -13,11 +13,7 @@ membersPage.controller("membersPageController", function ($scope, $http) {
   $scope.imageSrc ="";
   $scope.linkLabel;
 
-  // pagination
-  $scope.currentPage = 1;
-  $scope.numbPerPage = 10;
-  $scope.maxSize = 5;
-
+  $scope.mdDisableBackdrop = true;
 
 
 
@@ -30,15 +26,7 @@ membersPage.controller("membersPageController", function ($scope, $http) {
 
   };
 
-  $scope.numPages = function () {
-    return Math.ceil($scope.allUsers.length/ $scope.numbPerPage);
-  };
 
-
-  $scope.$watch('currentPage + numPerPage', function() {
-    var begin = (($scope.currentPage - 1) * $scope.numbPerPage), end = begin + $scope.numbPerPage;
-    $scope.filteredUsers = $scope.allUsers.slice(begin, end);
-  });
 
   function getUrl(bet) {
     return bet.affiliateLink;
@@ -66,6 +54,10 @@ membersPage.controller("membersPageController", function ($scope, $http) {
       .then(function (response) {
         console.log(response);
         $scope.matchedBets = response.data;
+
+        for (var i = 0; i < $scope.matchedBets.length; i++) {
+          $scope.matchedBets[i].date = $filter('date')($scope.matchedBets[i].date, "dd/MM/yyyy");
+        }
       });
   };
 
@@ -141,6 +133,59 @@ membersPage.controller("membersPageController", function ($scope, $http) {
 
   }
 
+
+  $scope.editTask = function (ev, task) {
+    // Appending dialog to document.body to cover sidenav in docs app
+    var confirm = $mdDialog.prompt()
+      .title('Edit your task!')
+      .textContent('Be sure to keep it short and sweet!')
+      .placeholder('Task')
+      .ariaLabel('New Task')
+      .initialValue(task.description)
+      .targetEvent(ev)
+      .clickOutsideToClose(true)
+      .ok('Submit')
+      .cancel('Cancel');
+    $mdDialog.show(confirm).then(function (result) {
+
+      var temp = task.description;
+      task.description = result;
+      // if ($scope.isValidTask(task, ev)) {
+      //   $scope.addTask(task, task.status, ev);
+      // } else {
+      //   setTimeout(function () {
+      //     $scope.editTask(ev, task);
+      //   }, 2000);
+      // }
+      task.message = temp;
+
+    });
+  };
+
+  $scope.showPrompt = function (ev, status) {
+    // Appending dialog to document.body to cover sidenav in docs app
+    var confirm = $mdDialog.prompt()
+      .title('Create a new task!')
+      .textContent('Be sure to keep it short and sweet!')
+      .placeholder('Task')
+      .ariaLabel('New Task')
+      .initialValue('')
+      .targetEvent(ev)
+      .clickOutsideToClose(true)
+      .ok('Add!')
+      .cancel('Cancel');
+
+    $mdDialog.show(confirm).then(function (result) {
+      // task = {};
+      // task.message = result;
+      // if ($scope.isValidTask(task, ev)) {
+      //   $scope.addTask(task, status, ev);
+      // }
+
+    }, function () {
+      $scope.status = 'You didn\'t name your dog.';
+    });
+  };
 
 
 });

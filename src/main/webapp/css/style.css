@@ -1533,5 +1533,22 @@ input[type="text"] {
   margin-top:10px;
 }
 
+.admin:hover {
+  background-color: #fff0fe;
+}
 
+.users-grid {
+  margin-top:20px;
+}
+
+.myDate {
+  position:absolute;
+  font-size:1em;
+  margin-right:10px;
+
+  width: 1em;
+  position: absolute;
+  top: 1em;
+  right: 6em;
+}
 
