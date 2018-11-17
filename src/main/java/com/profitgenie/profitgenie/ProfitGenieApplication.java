@@ -1,5 +1,6 @@
 package com.profitgenie.profitgenie;
 
+import com.profitgenie.profitgenie.service.EmailService;
 import com.profitgenie.profitgenie.service.EmailServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;

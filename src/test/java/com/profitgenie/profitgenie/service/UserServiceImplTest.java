@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -68,7 +69,7 @@ public class UserServiceImplTest {
         // when
         boolean userSupport = userService.isUserSupport(-1);
         // then
-        assertEquals(null, userSupport);
+        assertTrue(userSupport);
     }
 
 
