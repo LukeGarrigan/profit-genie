@@ -80,13 +80,18 @@ public class MatchedBetServiceImpl implements MatchedBetService, DtoDomainConver
 
     @Override
     public List<MatchedBetDto> updateMatchedBets(List<MatchedBetDto> matchedBetDtos) {
+        Collection<? extends GrantedAuthority> authorities = ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getAuthorities();
+        if (isASupport(authorities)) {
+            updateMatchedBetsPositioning(matchedBetDtos);
+        }
+        return matchedBetDtos;
+    }
 
+    private void updateMatchedBetsPositioning(List<MatchedBetDto> matchedBetDtos) {
         for (MatchedBet matchedBet : matchedBetDao.findAll()) {
             matchedBet.setSequence(getMatchedBetSequence(matchedBetDtos, matchedBet.getId()));
             matchedBetDao.save(matchedBet);
         }
-
-        return matchedBetDtos;
     }
 
     @Override
