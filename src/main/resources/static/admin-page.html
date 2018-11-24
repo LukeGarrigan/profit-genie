@@ -1,11 +1,15 @@
 <!DOCTYPE HTML>
 
+
+
 <script type="text/javascript" src="components/jquery/dist/jquery.js"></script>
 <script type="text/javascript" src="components/jquery-ui/jquery-ui.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+
 
 <!-- Angular Material Library -->
 <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
@@ -40,6 +44,7 @@
     <link rel="stylesheet" href="css/animate.css">
     <!-- Icomoon Icon Fonts-->
     <link rel="stylesheet" href="css/icomoon.css">
+    <link data-require="bootstrap-css@2.3.2" data-semver="2.3.2" rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" />
     <!-- Bootstrap  -->
     <link rel="stylesheet" href="css/bootstrap.css">
 
@@ -61,11 +66,16 @@
     <!--[if lt IE 9]>
     <script src="js/respond.min.js"></script>
 
+
     <![endif]-->
 
 
+    <!--<script data-require="angular.js@1.1.5" data-semver="1.1.5" src="http://code.angularjs.org/1.1.5/angular.min.js"></script>-->
+    <script data-require="angular-ui-bootstrap@0.3.0" data-semver="0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>
+
     <!-- drag and drop -->
     <script type="text/javascript" src="components/angular-ui-sortable/sortable.js"></script>
+
 
 
 </head>
@@ -152,7 +162,7 @@
 
 
                 <div ui-sortable="sortableOptions" ng-model="matchedBets">
-                    <div class="col-md-12 bland-white admin" ng-repeat="bet in matchedBets | filter: searchCriteria">
+                    <div class="col-md-12 bland-white admin" ng-repeat="bet in filteredItems | filter: searchCriteria">
 
                         <div class="work-flex">
 
@@ -185,43 +195,10 @@
                     </div>
                 </div>
 
+                <div data-pagination="" data-num-pages="numOfPages()"
+                     data-current-page="curPage" data-max-size="maxSize"
+                     data-boundary-links="true"></div>
 
-                <!--<div class="col-md-12">-->
-                <!--<div class="work-flex">-->
-                <!--<div class="half animate-box">-->
-                <!--<div class="row no-gutters">-->
-                <!--<div class="col-md-12 no-gutters">-->
-                <!--<a href="#" class="work-img" style="background-image: url(images/work-2.jpg);"></a>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--<div class="half animate-box">-->
-                <!--<div class="row no-gutters">-->
-                <!--<div class="col-md-12 no-gutters">-->
-                <!--<div class="display-t desc">-->
-                <!--<div class="display-tc">-->
-                <!--<h2><a href="#">A beige chair at a small white desk</a></h2>-->
-                <!--<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <ul class="pagination">
-                            <li class="disabled"><a href="#">&laquo;</a></li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">&raquo;</a></li>
-                        </ul>
-                    </div>
-                </div>
             </div>
         </div>
 

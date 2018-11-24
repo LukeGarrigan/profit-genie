@@ -1,4 +1,4 @@
-var membersPage = angular.module('membersPage', ['ngMaterial', 'ui.sortable']);
+var membersPage = angular.module('membersPage', ['ui.bootstrap','ngMaterial', 'ui.sortable']);
 
 membersPage.controller("membersPageController", function ($scope, $http, $mdDialog, $filter) {
 
@@ -10,21 +10,20 @@ membersPage.controller("membersPageController", function ($scope, $http, $mdDial
   $scope.sequence = 0;
   $scope.matchedBets = [];
   $scope.errorMessage = "";
-  $scope.imageSrc ="";
+  $scope.imageSrc = "";
   $scope.linkLabel;
+  $scope.itemsPerPage = 10;
 
   $scope.mdDisableBackdrop = true;
+
+  $scope.curPage = 1;
+  $scope.itemsPerPage = 3;
+  $scope.maxSize = 5;
 
 
 
   $scope.image = {};
-  $scope.onFileSelect = function($files) {
-    console.log($files);
 
-    $scope.image = $files[0];
-
-
-  };
 
 
 
@@ -44,7 +43,7 @@ membersPage.controller("membersPageController", function ($scope, $http, $mdDial
 
   };
 
-  $scope.getMatchedBetsAndUsers = function() {
+  $scope.getMatchedBetsAndUsers = function () {
     $scope.getAllMatchedBets();
     $scope.getAllUsers();
   };
@@ -58,13 +57,9 @@ membersPage.controller("membersPageController", function ($scope, $http, $mdDial
         for (var i = 0; i < $scope.matchedBets.length; i++) {
           $scope.matchedBets[i].date = $filter('date')($scope.matchedBets[i].date, "dd/MM/yyyy");
         }
+        getCurrentPage();
       });
   };
-
-
-
-
-
 
 
   $scope.submitMatchedBet = function () {
@@ -89,7 +84,7 @@ membersPage.controller("membersPageController", function ($scope, $http, $mdDial
     }).then(function response(response) {
       $scope.matchedBets.unshift(response.data);
       console.log($scope.matchedBets);
-    },function errorCallback(response) {
+    }, function errorCallback(response) {
       $scope.errorMessage = response.data.message;
     });
 
@@ -119,7 +114,7 @@ membersPage.controller("membersPageController", function ($scope, $http, $mdDial
   };
 
 
-  $scope.changeMembershipStatus = function(key) {
+  $scope.changeMembershipStatus = function (key) {
     $http.post("admin/toggle", key, {
       headers: {
         'Accept': 'application/json',
@@ -127,65 +122,27 @@ membersPage.controller("membersPageController", function ($scope, $http, $mdDial
       }
     }).then(function response(response) {
       $scope.allUsers = response.data.users;
-      alert("You have changed " + key +" membership status!");
+      alert("You have changed " + key + " membership status!");
     });
 
 
   }
 
 
-  $scope.editTask = function (ev, task) {
-    // Appending dialog to document.body to cover sidenav in docs app
-    var confirm = $mdDialog.prompt()
-      .title('Edit your task!')
-      .textContent('Be sure to keep it short and sweet!')
-      .placeholder('Task')
-      .ariaLabel('New Task')
-      .initialValue(task.description)
-      .targetEvent(ev)
-      .clickOutsideToClose(true)
-      .ok('Submit')
-      .cancel('Cancel');
-    $mdDialog.show(confirm).then(function (result) {
 
-      var temp = task.description;
-      task.description = result;
-      // if ($scope.isValidTask(task, ev)) {
-      //   $scope.addTask(task, task.status, ev);
-      // } else {
-      //   setTimeout(function () {
-      //     $scope.editTask(ev, task);
-      //   }, 2000);
-      // }
-      task.message = temp;
-
-    });
+  $scope.numOfPages = function () {
+    return Math.ceil($scope.matchedBets.length / $scope.itemsPerPage);
   };
 
-  $scope.showPrompt = function (ev, status) {
-    // Appending dialog to document.body to cover sidenav in docs app
-    var confirm = $mdDialog.prompt()
-      .title('Create a new task!')
-      .textContent('Be sure to keep it short and sweet!')
-      .placeholder('Task')
-      .ariaLabel('New Task')
-      .initialValue('')
-      .targetEvent(ev)
-      .clickOutsideToClose(true)
-      .ok('Add!')
-      .cancel('Cancel');
+  $scope.$watch('curPage + numPerPage', function() {
+    getCurrentPage();
+  });
 
-    $mdDialog.show(confirm).then(function (result) {
-      // task = {};
-      // task.message = result;
-      // if ($scope.isValidTask(task, ev)) {
-      //   $scope.addTask(task, status, ev);
-      // }
-
-    }, function () {
-      $scope.status = 'You didn\'t name your dog.';
-    });
-  };
+  function getCurrentPage(){
+    var begin = (($scope.curPage - 1) * $scope.itemsPerPage);
+    var end = begin + $scope.itemsPerPage;
+    $scope.filteredItems = $scope.matchedBets.slice(begin, end);
+  }
 
 
 });
