@@ -95,13 +95,39 @@ membersPage.controller("membersPageController", function ($scope, $http, $mdDial
     connectWith: ".col-md-12",
 
     stop: function (e, ui) {
-      var json = JSON.stringify($scope.matchedBets);
+      var stringifiedMatchedBets = [];
+      for (var i = 0; i < $scope.matchedBets.length; i++) {
+
+        var currentMatchedBet = $scope.matchedBets[i];
+
+        var matchedBetDto = {};
+        matchedBetDto.id = currentMatchedBet.id;
+        matchedBetDto.description = currentMatchedBet.description;
+        matchedBetDto.affiliateLink = currentMatchedBet.affiliateLink;
+        matchedBetDto.title = currentMatchedBet.title;
+        matchedBetDto.linkLabel = currentMatchedBet.linkLabel;
+
+
+        stringifiedMatchedBets.push(matchedBetDto);
+      }
+
+
+
+      var json = JSON.stringify(stringifiedMatchedBets);
       $http.post("matched/updateMatchedBets", json, {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         }
+      }).then(function response(response){
+        $scope.matchedBets = response.data;
+
+        for (var i = 0; i < $scope.matchedBets.length; i++) {
+          $scope.matchedBets[i].date = $filter('date')($scope.matchedBets[i].date, "dd/MM/yyyy");
+        }
+        getCurrentPage();
       });
+
     }
   };
 
