@@ -40,6 +40,8 @@
     <link rel="stylesheet" href="css/animate.css">
     <!-- Icomoon Icon Fonts-->
     <link rel="stylesheet" href="css/icomoon.css">
+
+    <link data-require="bootstrap-css@2.3.2" data-semver="2.3.2" rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" />
     <!-- Bootstrap  -->
     <link rel="stylesheet" href="css/bootstrap.css">
 
@@ -63,6 +65,8 @@
 
     <![endif]-->
 
+
+    <script data-require="angular-ui-bootstrap@0.3.0" data-semver="0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>
 
     <!-- drag and drop -->
     <script type="text/javascript" src="components/angular-ui-sortable/sortable.js"></script>
@@ -139,13 +143,17 @@
                 </a>
 
 
-                <div ng-repeat="person in allUsers | filter:searchCriteria">
+                <div ng-repeat="person in allUsers | paged:curPage:itemsPerPage | filter:searchCriteria">
                     <a href="#" class="list-group-item list-group-item-action"
                        ng-click="changeMembershipStatus(person.email)">
                         <b>Email:</b> {{person.email}} <br>
                         <b>Payment Email:</b> {{person.orderEmail}} <br>
                         <b>Member</b> {{person.member}}</a>
                 </div>
+
+                <div data-pagination="" data-num-pages="numOfPages()"
+                     data-current-page="curPage" data-max-size="maxSize"
+                     data-boundary-links="true"></div>
 
 
             </div>

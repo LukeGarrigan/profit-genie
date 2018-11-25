@@ -17,7 +17,7 @@ membersPage.controller("membersPageController", function ($scope, $http, $mdDial
   $scope.mdDisableBackdrop = true;
 
   $scope.curPage = 1;
-  $scope.itemsPerPage = 3;
+  $scope.itemsPerPage = 7;
   $scope.maxSize = 5;
 
 
