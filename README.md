@@ -5,4 +5,5 @@ A website and subscription service for matched betting.
 - [x] Enable membership roles 
 - [ ] Disable membership roles (This can be done manually)
 - [ ] Write some integration tests
-- [ ] Saving images on the server file system
+- [ ] Ability to click a matched bet to open it and view the entire description
+- [ ] Liquibase implementation for schema modifications
