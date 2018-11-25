@@ -170,5 +170,18 @@ membersPage.controller("membersPageController", function ($scope, $http, $mdDial
     $scope.filteredItems = $scope.matchedBets.slice(begin, end);
   }
 
+});
+
+
+membersPage.filter('paged', function() {
+  return function(items, currentPage, itemsPerPage) {
+    var begin = ((currentPage - 1) * itemsPerPage);
+    var end = begin + itemsPerPage;
+    return items.slice(begin, end);
+  }
+
 
 });
+
+
+

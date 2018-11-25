@@ -162,7 +162,7 @@
 
 
                 <div ui-sortable="sortableOptions" ng-model="matchedBets">
-                    <div class="col-md-12 bland-white admin" ng-repeat="bet in filteredItems | filter: searchCriteria">
+                    <div class="col-md-12 bland-white admin"ng-repeat="bet in matchedBets | filter:searchCriteria | paged:curPage:itemsPerPage">
 
                         <div class="work-flex">
 
