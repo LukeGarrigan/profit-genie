@@ -3,6 +3,7 @@ package com.profitgenie.profitgenie.dao.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import java.util.Date;
 
@@ -11,7 +12,8 @@ import java.util.Date;
 public class MatchedBet extends AbstractEntity {
 
 
-    @Column(length = 1000)
+    @Lob
+    @Column
     private String description;
     @Column
     private String affiliateLink;
