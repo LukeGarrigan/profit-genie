@@ -162,7 +162,7 @@
 
 
                 <div ui-sortable="sortableOptions" ng-model="matchedBets">
-                    <div class="col-md-12 bland-white admin"ng-repeat="bet in matchedBets | filter:searchCriteria | paged:curPage:itemsPerPage">
+                    <div class="col-md-12 bland-white admin"ng-repeat="bet in matchedBets | filter:searchCriteria | paged:curPage:itemsPerPage" ng-click="displayEntireDescription(bet)">
 
                         <div class="work-flex">
 
@@ -171,7 +171,7 @@
                                 <div class="col-md-12 no-gutters ">
                                     <div class="display-t desc">
                                             <h2><a href="#">{{bet.title}}</a></h2>
-                                            <p>{{bet.description}}</p>
+                                            <p>{{bet.showEntireDescription ? bet.description : bet.shortDescription + " . . ."}} </p>
                                             <a ng-href="{{bet.affiliateLink}}">{{bet.linkLabel}}</a>
 
                                     </div>

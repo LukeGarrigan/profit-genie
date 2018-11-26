@@ -51,6 +51,7 @@ public class MatchedBetServiceImpl implements MatchedBetService, DtoDomainConver
 
         // now has an id
         matchedBetDto.setId(matchedBet.getId());
+        setShortDescription(matchedBetDto);
         return matchedBetDto;
     }
 
@@ -139,7 +140,20 @@ public class MatchedBetServiceImpl implements MatchedBetService, DtoDomainConver
 
     @Override
     public MatchedBetDto toDto(MatchedBet domain) {
-        return modelMapper.map(domain, MatchedBetDto.class);
+        MatchedBetDto matchedBetDto = modelMapper.map(domain, MatchedBetDto.class);
+        setShortDescription(matchedBetDto);
+
+        return matchedBetDto;
+    }
+
+    private void setShortDescription(MatchedBetDto matchedBetDto) {
+        if (matchedBetDto.getDescription().length() > 300) {
+            matchedBetDto.setShortDescription(matchedBetDto.getDescription().substring(0, 300));
+            matchedBetDto.setShowEntireDescription(false);
+        } else {
+            matchedBetDto.setShortDescription(matchedBetDto.getDescription());
+            matchedBetDto.setShowEntireDescription(true);
+        }
     }
 
     private void incrementAllOtherSequences() {

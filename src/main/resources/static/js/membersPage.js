@@ -170,6 +170,14 @@ membersPage.controller("membersPageController", function ($scope, $http, $mdDial
     $scope.filteredItems = $scope.matchedBets.slice(begin, end);
   }
 
+
+  $scope.displayEntireDescription = function(matchedBet) {
+
+    if (matchedBet.description.length > 300) {
+      matchedBet.showEntireDescription = !matchedBet.showEntireDescription;
+    }
+    console.log("Displaying entire description");
+  }
 });
 
 

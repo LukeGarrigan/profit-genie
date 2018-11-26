@@ -6,6 +6,7 @@ import java.util.Date;
 public class MatchedBetDto implements Serializable {
 
     private String description;
+    private String shortDescription;
     private String affiliateLink;
     private String pathToImage;
     private String title;
@@ -14,6 +15,23 @@ public class MatchedBetDto implements Serializable {
     private long id;
     private Date date;
 
+    public boolean isShowEntireDescription() {
+        return isShowEntireDescription;
+    }
+
+    public void setShowEntireDescription(boolean showEntireDescription) {
+        isShowEntireDescription = showEntireDescription;
+    }
+
+    private boolean isShowEntireDescription;
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
 
     public String getLinkLabel() {
         return linkLabel;
