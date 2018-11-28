@@ -24,6 +24,8 @@
 		<java.version>1.8</java.version>
 	</properties>
 
+
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -148,6 +150,10 @@
                 <configuration>
                     <propertyFile>src/main/resources/liquibase.properties</propertyFile>
                 </configuration>
+				<configuration>
+					<addResources>true</addResources>
+				</configuration>
+
             </plugin>
 
         </plugins>
