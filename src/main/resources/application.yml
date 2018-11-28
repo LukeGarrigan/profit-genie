@@ -5,7 +5,7 @@ spring:
     database-platform: org.hibernate.dialect.SQLServer2012Dialect
     generate-ddl: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
   datasource:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     url: jdbc:sqlserver://localhost;databaseName=profit-genie;sendStringParametersAsUnicode=false
