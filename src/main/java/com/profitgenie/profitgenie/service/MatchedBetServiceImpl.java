@@ -147,12 +147,14 @@ public class MatchedBetServiceImpl implements MatchedBetService, DtoDomainConver
     }
 
     private void setShortDescription(MatchedBetDto matchedBetDto) {
-        if (matchedBetDto.getDescription().length() > 300) {
-            matchedBetDto.setShortDescription(matchedBetDto.getDescription().substring(0, 300));
-            matchedBetDto.setShowEntireDescription(false);
-        } else {
-            matchedBetDto.setShortDescription(matchedBetDto.getDescription());
-            matchedBetDto.setShowEntireDescription(true);
+        if (matchedBetDto.getDescription() != null){
+            if (matchedBetDto.getDescription().length() > 300) {
+                matchedBetDto.setShortDescription(matchedBetDto.getDescription().substring(0, 300));
+                matchedBetDto.setShowEntireDescription(false);
+            } else {
+                matchedBetDto.setShortDescription(matchedBetDto.getDescription());
+                matchedBetDto.setShowEntireDescription(true);
+            }
         }
     }
 
