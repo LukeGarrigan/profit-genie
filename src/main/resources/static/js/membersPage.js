@@ -103,8 +103,10 @@ membersPage.controller("membersPageController", function ($scope, $http, $mdDial
         var matchedBetDto = {};
         matchedBetDto.id = currentMatchedBet.id;
         matchedBetDto.description = currentMatchedBet.description;
+        matchedBetDto.shortDescription = currentMatchedBet.shortDescription;
         matchedBetDto.affiliateLink = currentMatchedBet.affiliateLink;
         matchedBetDto.title = currentMatchedBet.title;
+        matchedBetDto.showEntireDescription = currentMatchedBet.showEntireDescription;
         matchedBetDto.linkLabel = currentMatchedBet.linkLabel;
 
 
