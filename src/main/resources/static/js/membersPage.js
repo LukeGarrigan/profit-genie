@@ -122,11 +122,6 @@ membersPage.controller("membersPageController", function ($scope, $http, $mdDial
           'Content-Type': 'application/json'
         }
       }).then(function response(response){
-        $scope.matchedBets = response.data;
-
-        for (var i = 0; i < $scope.matchedBets.length; i++) {
-          $scope.matchedBets[i].date = $filter('date')($scope.matchedBets[i].date, "dd/MM/yyyy");
-        }
         getCurrentPage();
       });
 
