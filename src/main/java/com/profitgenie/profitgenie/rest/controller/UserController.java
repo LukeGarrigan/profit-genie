@@ -51,13 +51,16 @@ public class UserController {
 
 
 
+    //todo this needs to be changed when deploying
+    private static final String CONTEXT_PATH = "localhost:5000";
+
 
     @PostMapping(value = "/email")
     public void sendEmail(@RequestBody EmailDto emailDto) {
         SimpleMailMessage email = new SimpleMailMessage();
         email.setSubject(emailDto.getSubject());
         email.setText(emailDto.getFirstName()+ " " + emailDto.getSecondName()+ "\n"+emailDto.getMessage());
-        email.setTo("lukegarrigan8@gmail.com");
+        email.setTo("profitgenie88@gmail.com");
         email.setFrom(emailDto.getEmail());
         mailSender.sendSimpleMessage(email);
     }
@@ -98,7 +101,7 @@ public class UserController {
         }
         String token = UUID.randomUUID().toString();
         userService.createPasswordResetTokenForUser(user, token);
-        mailSender.sendSimpleMessage(constructResetTokenEmail("localhost:5000", request.getLocale(), token, user));
+        mailSender.sendSimpleMessage(constructResetTokenEmail(CONTEXT_PATH , request.getLocale(), token, user));
     }
 
     private SimpleMailMessage constructResetTokenEmail(String contextPath, Locale locale, String token, User user) {
