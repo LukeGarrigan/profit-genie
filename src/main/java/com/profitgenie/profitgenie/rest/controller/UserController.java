@@ -4,6 +4,7 @@ package com.profitgenie.profitgenie.rest.controller;
 import com.profitgenie.profitgenie.dao.domain.User;
 import com.profitgenie.profitgenie.exceptions.NoCurrentSessionException;
 import com.profitgenie.profitgenie.exceptions.UserNotFoundException;
+import com.profitgenie.profitgenie.rest.controller.dto.EmailDto;
 import com.profitgenie.profitgenie.rest.controller.dto.UserDto;
 import com.profitgenie.profitgenie.security.PasswordSecurityService;
 import com.profitgenie.profitgenie.service.EmailServiceImpl;
@@ -47,6 +48,19 @@ public class UserController {
 
     @Autowired
     private MembershipService membershipService;
+
+
+
+
+    @PostMapping(value = "/email")
+    public void sendEmail(@RequestBody EmailDto emailDto) {
+        SimpleMailMessage email = new SimpleMailMessage();
+        email.setSubject(emailDto.getSubject());
+        email.setText(emailDto.getFirstName()+ " " + emailDto.getSecondName()+ "\n"+emailDto.getMessage());
+        email.setTo("lukegarrigan8@gmail.com");
+        email.setFrom(emailDto.getEmail());
+        mailSender.sendSimpleMessage(email);
+    }
 
 
     @PostMapping(value = "/create")

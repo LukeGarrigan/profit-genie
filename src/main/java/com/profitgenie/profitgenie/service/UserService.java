@@ -1,6 +1,7 @@
 package com.profitgenie.profitgenie.service;
 
 import com.profitgenie.profitgenie.dao.domain.User;
+import com.profitgenie.profitgenie.rest.controller.dto.EmailDto;
 import com.profitgenie.profitgenie.rest.controller.dto.UserDto;
 import com.profitgenie.profitgenie.rest.controller.dto.UsersListDto;
 
@@ -24,6 +25,7 @@ public interface UserService {
     UsersListDto getExistingUsers();
 
     void changeMembershipStatus(String email);
+
 }
 
 

@@ -8,6 +8,7 @@ import com.profitgenie.profitgenie.dao.repository.UserDao;
 import com.profitgenie.profitgenie.exceptions.EmailAlreadyRegistered;
 import com.profitgenie.profitgenie.exceptions.MustBeSupportUser;
 import com.profitgenie.profitgenie.exceptions.UserNotFoundException;
+import com.profitgenie.profitgenie.rest.controller.dto.EmailDto;
 import com.profitgenie.profitgenie.rest.controller.dto.UserDto;
 import com.profitgenie.profitgenie.rest.controller.dto.UserViewDto;
 import com.profitgenie.profitgenie.rest.controller.dto.UsersListDto;

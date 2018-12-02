@@ -1,5 +1,36 @@
 var membersPage = angular.module('membersPage', ['ui.bootstrap','ngMaterial', 'ui.sortable']);
 
+membersPage.controller("contactController", function ($scope, $http){
+
+  $scope.email = "";
+  $scope.firstName = "";
+  $scope.secondName = "";
+  $scope.subject = "";
+  $scope.message = "";
+
+  $scope.sendEmail = function () {
+
+    var contactDto = {};
+
+    contactDto.email = $scope.email;
+    contactDto.firstName = $scope.firstName;
+    contactDto.secondName = $scope.secondName;
+    contactDto.subject = $scope.subject;
+    contactDto.message= $scope.message;
+
+
+    var json = JSON.stringify(contactDto);
+    $http.post("user/email", json, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+  }
+
+
+});
+
 membersPage.controller("membersPageController", function ($scope, $http, $mdDialog, $filter) {
 
 
@@ -175,6 +206,13 @@ membersPage.controller("membersPageController", function ($scope, $http, $mdDial
     }
     console.log("Displaying entire description");
   }
+
+
+  $scope.sendEmail = function(data) {
+
+    console.log("test");
+  }
+
 });
 
 
