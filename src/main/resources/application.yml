@@ -1,5 +1,5 @@
 server:
-  port: 5000
+  port: 80
 spring:
   jpa:
     database-platform: org.hibernate.dialect.SQLServer2012Dialect
@@ -7,12 +7,26 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    url: jdbc:sqlserver://localhost;databaseName=profit-genie;sendStringParametersAsUnicode=false
-    username: programmer
-    password: test
+    url: jdbc:sqlserver://profitgenie.database.windows.net:1433;database=ProfitGenie;user=ProfitGenie@profitgenie;password=Test_1234;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+    username: ProfitGenie
+    password:  Test_1234
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+#
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: tcp:profitgenie.database.windows.net,1433;Initial Catalog=ProfitGenie;User ID=ProfitGenie;Password=Test_1234
+#    username: ProfitGenie
+#    password: Test_1234
 
 
+
+#    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#    url: jdbc:sqlserver://localhost;databaseName=profit-genie;sendStringParametersAsUnicode=false
+#    username: programmer
+#    password: test
+
+
+#Data Source=tcp:profitgenie.database.windows.net,1433;Initial Catalog=ProfitGenie;User ID=ProfitGenie;Password=Test_1234
 
 
 
