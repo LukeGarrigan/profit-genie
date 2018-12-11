@@ -52,6 +52,14 @@
 		</dependency>
 
 
+		<!-- https://mvnrepository.com/artifact/com.microsoft.azure/azure-webapp-maven-plugin -->
+		<dependency>
+			<groupId>com.microsoft.azure</groupId>
+			<artifactId>azure-webapp-maven-plugin</artifactId>
+			<version>1.5.1</version>
+		</dependency>
+
+
 		<!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
